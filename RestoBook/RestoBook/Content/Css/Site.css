@@ -15,3 +15,12 @@ select,
 textarea {
     max-width: 280px;
 }
+
+#bgheader{
+    background-color:#97D17A;
+    border:none;
+}
+
+.navbar > .container .navbar-brand{
+    color:#FFF;
+}

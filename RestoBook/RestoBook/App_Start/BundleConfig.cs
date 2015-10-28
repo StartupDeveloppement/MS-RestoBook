@@ -13,7 +13,8 @@ namespace RestoBook
         {
 
             bundles.Add(new StyleBundle("~/Content/Css").Include(
-            "~/Content/Css/bootstrap.min.css"));
+            "~/Content/Css/bootstrap.min.css",
+            "~/Content/Css/Site.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
             "~/Scripts/jquery-{version}.js"));

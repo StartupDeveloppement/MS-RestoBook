@@ -21,12 +21,31 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                 </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="navLogin">Login</a>
+                        <div class="dropdown-menu" style="padding:17px">
+                            @*@(Html.BeginForm("", "", FormMethod.Post,new { @id = "formLogin", @class = "form" }))
+                            {
+                                <input type="text" />
+                                <input type="password" />
+                                <button class="btn" type="button">Login</button>
+                            }*@
+                            <form class="form-group">
+                                <input type="text" class="form-control"/>
+                                <input type="password"/>
+                            </form>
+                        </div>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
-
-    <div class="container body-content">
+    
+    @*<div class="container body-content">*@
+    
         @RenderBody()
+    <div class="container">
         <hr />
         <footer>
             <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>

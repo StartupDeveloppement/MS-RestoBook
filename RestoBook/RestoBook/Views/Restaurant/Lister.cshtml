@@ -1,0 +1,27 @@
+﻿@model PagedList.IPagedList<RestoBook.Models.ListerRestaurants>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+@{
+    ViewBag.Title = "Lister";
+}
+
+<div class="container">
+    <h2>Lister</h2>
+    @foreach (var item in Model)
+    {
+        <div class="row">
+            <div class="col-md-9">
+                @Html.DisplayFor(m => item.Nom)
+                @Html.DisplayFor(m => item.Ville)
+                @foreach (var itemCuisine in item.ListCuisine)
+                {
+                    <a href="#">@Html.DisplayFor(m => itemCuisine)</a>
+                }
+            </div>
+        </div>
+    }
+
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+    @Html.PagedListPager(Model, page => Url.Action("Lister",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+</div>

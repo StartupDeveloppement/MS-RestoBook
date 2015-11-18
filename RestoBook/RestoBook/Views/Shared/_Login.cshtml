@@ -1,0 +1,35 @@
+﻿@model RestoBook.Models.LoginViewModel
+<div class="dropdown-menu" style="padding:17px" id="dropdown-login">
+
+    @*@using (Html.BeginForm("", "", FormMethod.Post, new { @id = "formLogin" }))
+        {
+            <input type="text" class="form-control" />
+            <input type="password" class="form-control" />
+            <label class="checkbox-inline">
+                <input type="checkbox" id="rememberMe" value="rememberMe"> rememberMe
+            </label>
+            <button class="btn" type="button">Login</button>
+        }*@
+    @using (Html.BeginForm("", "", FormMethod.Post, new { @id = "formLogin" }))
+    {
+        @*@Html.AntiForgeryToken()*@
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.EditorFor(model => model.Login, new { htmlAttributes = new { @class = "form-control", @placeholder = "Email" } })
+
+        </div>
+        <div class="form-group">
+
+
+            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mot de passe" } })
+
+        </div>
+
+        <div class="form-group">
+            @*<div class="col-md-offset-2 col-md-10">*@
+                <input type="submit" value="Login" class="btn btn-default" />
+           @*</div>*@ 
+        </div>
+    }
+</div>
+

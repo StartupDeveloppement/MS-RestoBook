@@ -26,10 +26,5 @@ namespace RestoBook.Models
 
     }
 
-    public class AutoCompleteSearchVilledfd
-    {
-        public List<AutoCompleteSearchRestaurant> Villea { get; set; }
-        public List<AutoCompleteSearchVille> Ville { get; set; }
 
-    }
 }

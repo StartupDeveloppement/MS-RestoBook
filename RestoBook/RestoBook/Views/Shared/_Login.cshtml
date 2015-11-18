@@ -1,0 +1,12 @@
+﻿<div class="dropdown-menu" style="padding:17px" id="dropdown-login">
+    @using (Html.BeginForm("", "", FormMethod.Post, new { @id = "formLogin" }))
+    {
+        <input type="text" class="form-control" />
+        <input type="password" class="form-control" />
+        <label class="checkbox-inline">
+            <input type="checkbox" id="rememberMe" value="rememberMe"> rememberMe
+        </label>
+        <button class="btn" type="button">Login</button>
+    }
+</div>
+

@@ -3,8 +3,9 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title - My ASP.NET Application</title>              
     @Styles.Render("~/Content/Css")
+    @Styles.Render("~/Content/Css/font-awesome")
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
@@ -19,11 +20,17 @@
                 @Html.ActionLink("RestoBook", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
+                <ul class="nav navbar-nav navigation">
+                    <li class="@(ViewBag.Title.Equals("Index") ? "active" : "" )">@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li class="@(ViewBag.Title.Equals("Tops") ? "active" : "" )">@Html.ActionLink("Tops", "", "")</li>
+                    <li class="@(ViewBag.Title.Equals("Promotions") ? "active" : "" )">@Html.ActionLink("Promotions", "", "")</li>
+                    <li class="@(ViewBag.Title.Equals("Evénements") ? "active" : "" )">@Html.ActionLink("Evénements", "", "")</li>
+                    <li class="@(ViewBag.Title.Equals("Proposer") ? "active" : "" )">@Html.ActionLink("Proposer","Proposer","Restaurant")</li>
                 </ul>
-                <ul class="nav navbar-nav navbar-right">
+                <ul class="nav navbar-nav navbar-right navigation" id="navLogin">
+                    <li>@Html.ActionLink("Sign in","","")</li>
                     <li>
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="navLogin">Login</a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Login</a>
                         @Html.Partial("_Login")
                     </li>
                 </ul>
@@ -41,5 +48,8 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("chosen", required: false)
+    @RenderSection("autocompletegetsearch", required:false)
+
 </body>
 </html>

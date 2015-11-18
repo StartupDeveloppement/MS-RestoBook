@@ -12,12 +12,13 @@
 }*/
 
 /* Set width on the form input elements since they're 100% wide by default */
-input,
+/*input,
 select,
 textarea {
     max-width: 280px;
-}
+}*/
 
+/************************ Top ************************/
 #bgheader{
     background-color:#97D17A;
     border:none;
@@ -38,11 +39,16 @@ textarea {
     right: 10px;
 }
 
-.navbar-inverse .navbar-nav > li > #navLogin{
+.navbar-inverse .navigation > li > a{
     color:#fff;
 }
 
-.navbar-inverse .navbar-nav > .open > #navLogin, .navbar-inverse .navbar-nav > .open > #navLogin:focus, .navbar-inverse .navbar-nav > .open > #navLogin:hover{
+.navbar-inverse .navigation > .active > a, .navbar-inverse .navigation > .active > a:focus, .navbar-inverse .navigation > .active > a:hover{
+    color:#fff;
+    background-color:#4C8DA6;
+}
+
+.navbar-inverse #navLogin > .open > a, .navbar-inverse #navLogin > .open > a:focus, .navbar-inverse #navLogin > .open > a:hover{
     background-color:transparent;
     border:none;
 }
@@ -50,3 +56,68 @@ textarea {
 #dropdown-login{
     min-width:230px;
 }
+
+.validation-summary-valid.alert-danger {
+    display: none;
+}
+
+/************************ Form ************************/
+#SelectedItemsCuisine_chosen{
+    display:block;
+}
+
+#SelectedItemsCuisine_chosen .chosen-choices{
+    border-radius:4px;
+}
+
+.ui-autocomplete>li {
+  border-radius:4px;
+}
+
+#SearchString{
+    height:auto;
+}
+
+
+@import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+
+fieldset, label { margin: 0; padding: 0; }
+body{ margin: 20px; }
+h1 { font-size: 1.5em; margin: 10px; }
+
+/****** Style Star Rating Widget *****/
+
+.rating { 
+  border: none;
+  float: left;
+}
+
+.rating > input { display: none; } 
+.rating > label:before { 
+  margin: 5px;
+  font-size: 1.25em;
+  font-family: FontAwesome;
+  display: inline-block;
+  content: "\f005";
+}
+
+.rating > .half:before { 
+  content: "\f089";
+  position: absolute;
+}
+
+.rating > label { 
+  color: #ddd; 
+ float: right; 
+}
+
+/***** CSS Magic to Highlight Stars on Hover *****/
+
+.rating > input:checked ~ label, /* show gold star when clicked */
+.rating:not(:checked) > label:hover, /* hover current star */
+.rating:not(:checked) > label:hover ~ label { color: #FFD700;  } /* hover previous stars in list */
+
+.rating > input:checked + label:hover, /* hover current star when changing rating */
+.rating > input:checked ~ label:hover,
+.rating > label:hover ~ input:checked ~ label, /* lighten current selection */
+.rating > input:checked ~ label:hover ~ label { color: #FFED85;  } 

@@ -66,6 +66,7 @@ namespace RestoBook.Linq
                                  Id = restaurant.Id_Restaurant,
                                  Nom = restaurant.lb_nom,
                                  Ville = ville.lb_ville,
+                                 IdCuisine = cuisine.Id_Cuisine,
                                  StrCuisine = cuisine.lb_cuisne,
                                  Notation = note.Note
                              };
@@ -84,7 +85,8 @@ namespace RestoBook.Linq
                                Nom = gp.FirstOrDefault().Nom,
                                Ville = gp.FirstOrDefault().Ville,
                                Notation = gp.Sum(s => s.Notation),
-                               ListCuisine = gp.Select(s => s.StrCuisine).ToList()
+                               ListCuisine = gp.Select(s => s.StrCuisine).ToList(),
+                               DictCuisine = gp.Select(s => new { s.IdCuisine, s.StrCuisine }).ToDictionary(m=>m.IdCuisine,m=>m.StrCuisine)
                            };
             return gpResult;
         }
@@ -139,6 +141,30 @@ namespace RestoBook.Linq
 
                 return details.FirstOrDefault();
 
+            }
+        }
+
+        public List<ViewModelListerRestaurants> ListerRestaurantByCuisine(int id)
+        {
+            using (var db =new RestaurantDbContext())
+            {
+                var result = from restaurant in db.db_restaurants
+                             from cuisine in restaurant.TypeCuisines
+                             from note in restaurant.Notations
+                             join addresse in db.db_addresse on restaurant.Id_Restaurant equals addresse.RestaurantsId
+                             join ville in db.db_ville on addresse.VilleId equals ville.Id_Ville
+                             where restaurant.isActive && cuisine.Id_Cuisine == id
+                             select new ViewModelListerRestaurants()
+                             {
+                                 Id = restaurant.Id_Restaurant,
+                                 Nom = restaurant.lb_nom,
+                                 Ville = ville.lb_ville,
+                                 IdCuisine = cuisine.Id_Cuisine,
+                                 StrCuisine = cuisine.lb_cuisne,
+                                 Notation = note.Note
+                             };
+
+                return result.ToList();
             }
         }
     }

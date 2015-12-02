@@ -106,7 +106,15 @@ textarea {
     margin-top:15px;
     margin-bottom:30px
 }
-/*.lsRestaurant{
-    margin-bottom:20px;
-    background-color:red;
-}*/
+
+.lsRestaurant{
+    background-color:#EDEDED;
+}
+
+.lsRestaurant img{
+    height:150px;
+}
+
+.content-restaurant{
+    vertical-align:middle;
+}

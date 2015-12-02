@@ -13,5 +13,6 @@ namespace RestoBook.Models.ViewModels
         public string Ville { get; set; }
         public double Notation { get; set; }
         public List<string> ListCuisine { get; set; }
+        public Dictionary<int,string> DictCuisine { get; set; }
     }
 }

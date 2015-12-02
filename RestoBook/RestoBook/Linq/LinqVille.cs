@@ -8,7 +8,6 @@ namespace RestoBook.Linq
 {
     public class LinqVille
     {
-
         public  List<ViewModelVille> GetVilleByValue(string search)
         {
             using (var db = new RestaurantDbContext())

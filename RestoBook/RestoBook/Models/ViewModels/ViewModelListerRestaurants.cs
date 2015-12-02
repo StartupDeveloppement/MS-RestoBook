@@ -9,6 +9,7 @@ namespace RestoBook.Models.ViewModels
     public class ViewModelListerRestaurants
     {
         public int Id { get; set; }
+        public int IdCuisine { get; set; }
         public string Nom { get; set; }
         public string Ville { get; set; }
         public string StrCuisine { get; set; }

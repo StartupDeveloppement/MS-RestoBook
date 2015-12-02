@@ -120,7 +120,16 @@ namespace RestoBook.Controllers
 
             return RedirectToAction("Index","Home");
         }
-    
+
+        public ActionResult ListerRestaurantCuisine(int id,int? page)
+        {
+            LinqRestaurant linqRestaurant = new LinqRestaurant();
+            int pageSize = 2;
+            int pageNumber = (page ?? 1);
+            var lsrestaurantcuisine = linqRestaurant.ListerRestaurantByCuisine(id);
+            var gpRestaurant = linqRestaurant.GroupRestaurant(lsrestaurantcuisine);
+            return View(gpRestaurant.ToPagedList(pageNumber,pageSize));
+        }
 
         public ActionResult Details(int id)
         {

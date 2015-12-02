@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using System.Security.Claims
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -25,14 +26,35 @@
                     <li class="@(ViewBag.Title.Equals("Tops") ? "active" : "" )">@Html.ActionLink("Tops", "", "")</li>
                     <li class="@(ViewBag.Title.Equals("Promotions") ? "active" : "" )">@Html.ActionLink("Promotions", "", "")</li>
                     <li class="@(ViewBag.Title.Equals("Evénements") ? "active" : "" )">@Html.ActionLink("Evénements", "", "")</li>
-                    <li class="@(ViewBag.Title.Equals("Proposer") ? "active" : "" )">@Html.ActionLink("Proposer","Proposer","Restaurant")</li>
+                    <li class="@(ViewBag.Title.Equals("Proposer") ? "active" : "" )">@Html.ActionLink("Proposer", "Proposer", "Restaurant")</li>
+                   
+
+
                 </ul>
                 <ul class="nav navbar-nav navbar-right navigation" id="navLogin">
-                    <li>@Html.ActionLink("Sign in","","")</li>
+                    @if (Request.IsAuthenticated)
+                    {
+                        var claimIdentity = User.Identity as ClaimsIdentity;
+                        var homeLinkText = "";
+                        if (claimIdentity != null)
+                        {
+                            homeLinkText = "Bonjour, " + claimIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
+                        }
+                        @Html.ActionLink(homeLinkText, "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                        <li>@Html.ActionLink("Se déconnecter", "Logout", "Authentication")</li>
+                    }
+                    else
+                    {
+
+
+                    <li>@Html.ActionLink("Sign in", "", "")</li>
+                    
                     <li>
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Login</a>
-                        @Html.Partial("_Login")
+                        @Html.ActionLink("Login", "Login", "Authentication")
+                        @*<a href="#" class="dropdown-toggle" data-toggle="dropdown">Login</a>
+                        @Html.Partial("_Login")*@
                     </li>
+                    }
                 </ul>
             </div>
         </div>

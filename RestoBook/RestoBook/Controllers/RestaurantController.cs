@@ -86,9 +86,7 @@ namespace RestoBook.Controllers
             return View(model);
         }
 
-
-
-        public ActionResult Lister(string SearchString,string currentFilter, int? page)
+        public ActionResult Lister(string search, string currentFilter, int? page)
         {
             LinqRestaurant linqRestaurant = new LinqRestaurant();
 
@@ -102,25 +100,27 @@ namespace RestoBook.Controllers
                 return View(result.ToPagedList(pageNumber, pageSize));
             }
 
-            if (SearchString != null)
+            if (search != null)
             {
                 page = 1;
             }
             else
             {
-                SearchString = currentFilter;
+                search = currentFilter;
             }
 
-            ViewBag.CurrentFilter = SearchString;
+            ViewBag.CurrentFilter = search;
 
-            if (!string.IsNullOrEmpty(SearchString))
+            if (!string.IsNullOrEmpty(search))
             {
-                var listerRestaurant = linqRestaurant.ListerRestaurants(SearchString);
+                var listerRestaurant = linqRestaurant.ListerRestaurants(search);
                 var gpRestaurant = linqRestaurant.GroupRestaurant(listerRestaurant);
                 return View(gpRestaurant.ToPagedList(pageNumber, pageSize));
             }
-            return RedirectToAction("Index", "Home");
+
+            return RedirectToAction("Index","Home");
         }
+    
 
         public ActionResult Details(int id)
         {

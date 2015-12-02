@@ -33,7 +33,7 @@ namespace RestoBook.Controllers
                     var listerRestaurant = linqRestaurant.ListerRestaurants(SearchString);
                     var gpRestaurant = linqRestaurant.GroupRestaurant(listerRestaurant);
                     TempData["ResultSearch"] = gpRestaurant;
-                    return RedirectToAction("Lister", "Restaurant");
+                    return RedirectToAction("Lister", "Restaurant", new { search = SearchString });
                 }
             }
 

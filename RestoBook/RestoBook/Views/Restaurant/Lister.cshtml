@@ -6,37 +6,40 @@
 }
 
 <div class="container">
-    <h2>Lister</h2>
- 
-        @*@Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-control", placeholder = "Ville, rue, nom du restaurant", required = "required" })*@
-  
-    @Html.Partial("_Search",(string)ViewBag.CurrentFilter)
-
+    @*@Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-control", placeholder = "Ville, rue, nom du restaurant", required = "required" })*@
+    <div id="lssearch">
+        <div class="row">
+            @Html.Partial("_Search", (string)ViewBag.CurrentFilter)
+        </div>
+    </div>
+    <
     @foreach (var item in Model)
     {
-        <div class="row">
-            <div class="col-md-8">
-                <div class="row">
-                    <div class="col-md-4">
-                        <img src="~/Content/Images/restaurant.jpg" width="100%" height="100px" />
-                    </div>
-                    <div class="col-md-5">
-                        <span><a href="@Url.Action("Details","Restaurant", new { id = item.Id })">@Html.DisplayFor(m => item.Nom)</a></span>
-                        <span>@Html.TextBoxFor(m => item.Notation, new { @type = "number", @class = "note" })</span>
-                        <span>
-                            Cuisine:
-                            @foreach (var itemCuisine in item.ListCuisine)
-                            {
-                                <a href="#">@Html.DisplayFor(m => itemCuisine)</a>
-                            }
-                        </span>
+            
+        
+            @*<div class="row" style="background:yellow">
+                <div class="col-md-6 col-md-offset-6">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <img src="~/Content/Images/restaurant.jpg" width="100%" height="100px" />
+                        </div>
+                        <div class="col-md-5">
+                            <span><a href="@Url.Action("Details","Restaurant", new { id = item.Id })">@Html.DisplayFor(m => item.Nom)</a></span>
+                            <span>@Html.TextBoxFor(m => item.Notation, new { @type = "number", @class = "note" })</span>
+                            <span>
+                                Cuisine:
+                                @foreach (var itemCuisine in item.ListCuisine)
+                                {
+                                    <a href="#">@Html.DisplayFor(m => itemCuisine)</a>
+                                }
+                            </span>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
+           
+        </div>*@
     }
 
-    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
     @Html.PagedListPager(Model, page => Url.Action("Lister",
     new { page, currentFilter = ViewBag.CurrentFilter }))
 </div>

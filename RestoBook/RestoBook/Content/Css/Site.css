@@ -100,3 +100,13 @@ textarea {
     overflow:visible;
     clip:auto;
 }
+
+/************************ Lister ************************/
+#lssearch{
+    margin-top:15px;
+    margin-bottom:30px
+}
+/*.lsRestaurant{
+    margin-bottom:20px;
+    background-color:red;
+}*/

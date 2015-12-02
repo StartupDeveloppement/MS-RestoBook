@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using RestoBook.Models;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace RestoBook.Models
+namespace RestoBook.DAL
 {
     public class RestaurantDbContext:DbContext
     {
@@ -14,6 +10,7 @@ namespace RestoBook.Models
         public DbSet<TypeCuisine> db_typecuisine { get; set; }
         public DbSet<Restaurants> db_restaurants { get; set; }
         public DbSet<Adresse> db_addresse { get; set; }
+        public DbSet<Notation> db_notation { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -25,6 +22,12 @@ namespace RestoBook.Models
                 .Map(t => t.MapLeftKey("Id_Restaurant")
                     .MapRightKey("Id_Cuisine")
                     .ToTable("TypeCuisinesRestaurants"));
+
+            modelBuilder.Entity<Restaurants>()
+                .HasMany(c => c.Notations).WithMany(i => i.Restaurants)
+                .Map(t => t.MapLeftKey("Id_Restaurant")
+                    .MapRightKey("Id_Notation")
+                    .ToTable("NotationsRestaurants"));
 
             modelBuilder.Entity<Adresse>()
                 .HasRequired<Restaurants>(s => s.Restaurants)

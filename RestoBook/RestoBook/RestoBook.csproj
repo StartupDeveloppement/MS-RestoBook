@@ -126,6 +126,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Css\bootstrap-chosen.css" />
+    <Content Include="Content\Css\PagedList.css" />
+    <Content Include="Content\Css\star-rating.css" />
+    <Content Include="Content\Css\star-rating.min.css" />
     <Content Include="Content\Images\chosen-sprite%402x.png" />
     <Content Include="Content\Images\chosen-sprite.png" />
     <Content Include="Content\Css\bootstrap-theme.css" />
@@ -133,7 +136,8 @@
     <Content Include="Content\Css\bootstrap.css" />
     <Content Include="Content\Css\bootstrap.min.css" />
     <Content Include="Content\Css\Site.css" />
-    <Content Include="Content\PagedList.css" />
+    <Content Include="Content\Images\restaurant.jpg" />
+    <Content Include="Content\Images\Screen-Shot-2015-11-19-at-2.01.32-PM.png" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
     <Content Include="Content\themes\base\autocomplete.css" />
@@ -190,7 +194,7 @@
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\chosen.jquery.js" />
     <Content Include="Scripts\chosen.jquery.min.js" />
-    <Content Include="Scripts\homesearch-autocomplete.js" />
+    <Content Include="Scripts\search-autocomplete.js" />
     <Content Include="Scripts\jquery-2.1.4.js" />
     <Content Include="Scripts\jquery-2.1.4.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -201,6 +205,8 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\star-rating.js" />
+    <Content Include="Scripts\star-rating.min.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -208,6 +214,10 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Linq\LinqNoteEvaluation.cs" />
+    <Compile Include="Linq\LinqRestaurant.cs" />
+    <Compile Include="Linq\LinqVille.cs" />
+    <Compile Include="Linq\LinqCuisine.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RestaurantController.cs" />
     <Compile Include="Global.asax.cs">
@@ -221,14 +231,36 @@
     <Compile Include="Migrations\201511101339578_ActiveRestaurant.Designer.cs">
       <DependentUpon>201511101339578_ActiveRestaurant.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201511230934335_notation.cs" />
+    <Compile Include="Migrations\201511230934335_notation.Designer.cs">
+      <DependentUpon>201511230934335_notation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201511240937363_modifNote.cs" />
+    <Compile Include="Migrations\201511240937363_modifNote.Designer.cs">
+      <DependentUpon>201511240937363_modifNote.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201511240940058_modifNote1.cs" />
+    <Compile Include="Migrations\201511240940058_modifNote1.Designer.cs">
+      <DependentUpon>201511240940058_modifNote1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201511240941593_modifNote2.cs" />
+    <Compile Include="Migrations\201511240941593_modifNote2.Designer.cs">
+      <DependentUpon>201511240941593_modifNote2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Adresse.cs" />
-    <Compile Include="Models\AutoCompleteSearch.cs" />
-    <Compile Include="Models\ListerRestaurants.cs" />
-    <Compile Include="Models\RestaurantDbContext.cs" />
+    <Compile Include="DAL\RestaurantDbContext.cs" />
+    <Compile Include="Models\Notation.cs" />
     <Compile Include="Models\Restaurants.cs" />
     <Compile Include="Models\TypeCuisine.cs" />
-    <Compile Include="Models\ViewModelRestaurant.cs" />
+    <Compile Include="Models\ViewModels\ViewModelAddRestaurant.cs" />
+    <Compile Include="Models\ViewModels\ViewModelAllDetailRestaurants.cs" />
+    <Compile Include="Models\ViewModels\ViewModelDetailRestaurants.cs" />
+    <Compile Include="Models\ViewModels\ViewModelEvaluation.cs" />
+    <Compile Include="Models\ViewModels\ViewModelGroupRestaurants.cs" />
+    <Compile Include="Models\ViewModels\ViewModelListerRestaurants.cs" />
+    <Compile Include="Models\ViewModels\ViewModelSearch.cs" />
+    <Compile Include="Models\ViewModels\ViewModelVille.cs" />
     <Compile Include="Models\Ville.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -244,6 +276,9 @@
     <Content Include="Views\Shared\_Login.cshtml" />
     <Content Include="Views\Restaurant\Proposer.cshtml" />
     <Content Include="Views\Restaurant\Lister.cshtml" />
+    <Content Include="Views\Shared\View.cshtml" />
+    <Content Include="Views\Restaurant\Details.cshtml" />
+    <Content Include="Views\Shared\_Search.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -260,6 +295,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201511101339578_ActiveRestaurant.resx">
       <DependentUpon>201511101339578_ActiveRestaurant.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511230934335_notation.resx">
+      <DependentUpon>201511230934335_notation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511240937363_modifNote.resx">
+      <DependentUpon>201511240937363_modifNote.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511240940058_modifNote1.resx">
+      <DependentUpon>201511240940058_modifNote1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511240941593_modifNote2.resx">
+      <DependentUpon>201511240941593_modifNote2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

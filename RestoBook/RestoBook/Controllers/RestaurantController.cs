@@ -1,196 +1,164 @@
 ﻿using RestoBook.Models;
-using System;
 using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Web;
 using System.Web.Mvc;
 using PagedList;
+using RestoBook.DAL;
+using RestoBook.Linq;
+using RestoBook.Models.ViewModels;
 
 namespace RestoBook.Controllers
 {
     public class RestaurantController : Controller
     {
-        public RestaurantDbContext db = new RestaurantDbContext();
-
-        public async Task<IEnumerable<TypeCuisine>> GetAllCuisineList()
+        public JsonResult AutoCompleteGetVille(string term)
         {
-            var type_cuisine = db.db_typecuisine.OrderBy(o => o.lb_cuisne);
-            return await type_cuisine.ToListAsync();
-        }
-
-        public async Task<List<Ville>> GetSearchVilleList(string searchVille)
-        {
-            var villes = db.db_ville.OrderBy(o => o.lb_ville).Where(w => w.lb_ville.ToLower().Contains(searchVille.ToLower()));
-            return await villes.ToListAsync();
-        }
-
-        public async Task<JsonResult> AutoCompleteGetVille(string term)
-        {
-            List<Ville> lstVille = await GetSearchVilleList(term);
-            var result = lstVille.Select(s => s.lb_ville);
+            LinqVille linqVille = new LinqVille();
+            var result = linqVille.GetVilleByValue(term);
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-
         // GET: Restaurant
-        public async Task<ActionResult> Proposer()
+        public ActionResult Proposer()
         {
-            ViewModelRestaurant m_view = new ViewModelRestaurant();
-            m_view.ItemsCuisine = await GetAllCuisineList();
-            if (m_view.ItemsCuisine.Count() == 0)
-            {
-                return HttpNotFound();
-            }
+            ViewModelAddRestaurant m_view = new ViewModelAddRestaurant();
+            LinqCuisine linqCuisine = new LinqCuisine();
+            m_view.ItemsCuisine = linqCuisine.GetAllCuisine();
             return View(m_view);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Proposer(ViewModelRestaurant model, bool EmptyVille)
+        public ActionResult Proposer(ViewModelAddRestaurant model, bool EmptyVille)
         {
+            LinqCuisine linqCuisine = new LinqCuisine();
+
             if (ModelState.IsValid)
             {
                 Restaurants view_newRestaurant = model.m_restaurant;
                 Ville view_ville = model.m_ville;
                 Adresse view_addresse = model.m_adresse;
+                Notation view_notation = model.m_notation;
 
-                var existingRestaurant = from restaurant in db.db_restaurants
-                                         join addr in db.db_addresse on restaurant.Id_Restaurant equals addr.RestaurantsId
-                                         join ville in db.db_ville on addr.VilleId equals ville.Id_Ville
-                                         where restaurant.lb_nom.ToLower().Equals(view_newRestaurant.lb_nom.ToLower())
-                                         && addr.lb_rue.ToLower().Equals(view_addresse.lb_rue.ToLower())
-                                         && addr.lb_codepostal.ToLower().Equals(view_addresse.lb_codepostal.ToLower())
-                                         && ville.lb_ville.ToLower().Equals(view_ville.lb_ville.ToLower())
-                                         select restaurant;
+                view_newRestaurant.lb_nom = System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(view_newRestaurant.lb_nom);
 
-                if (existingRestaurant.Count() > 0)
+                LinqRestaurant linqRestautant = new LinqRestaurant();
+
+                int result = linqRestautant.ExistRestaurant(view_newRestaurant.lb_nom, view_addresse.lb_rue, view_addresse.lb_codepostal, view_ville.lb_ville);
+
+                if (result>0)
                     return RedirectToAction("Index", "Home");
 
-                List<Ville> lstVille = await GetSearchVilleList(view_ville.lb_ville.ToLower());
-                Ville existingCity = lstVille.FirstOrDefault();
+                LinqVille linqVille = new LinqVille();
+                var existingCity = linqVille.GetVilleFirst(view_ville.lb_ville.ToLower());
 
-                if ((EmptyVille) && existingCity == null)
+                using(var db = new RestaurantDbContext())
                 {
-                    view_ville.lb_ville = char.ToUpper(view_ville.lb_ville[0]) + view_ville.lb_ville.Substring(1);
-                    view_addresse.lb_rue = view_addresse.lb_rue.Replace(",", "");
-                    db.db_ville.Add(view_ville);
-                    db.db_addresse.Add(view_addresse);
-                }
-                else
-                {
-                    view_addresse.lb_rue = view_addresse.lb_rue.Replace(",", "");
-                    db.db_ville.Attach(existingCity);
-                    existingCity.Adresses.Add(view_addresse);
-                }
-              
-                foreach (string typeCuisine in model.SelectedItemsCuisine)
-                {
-                    IEnumerable<TypeCuisine> lstCuisine = await GetAllCuisineList();
-
-                    if (lstCuisine.Count() == 0)
+                    if ((EmptyVille) && existingCity == null)
                     {
-                        return HttpNotFound();
+                        view_ville.lb_ville = char.ToUpper(view_ville.lb_ville[0]) + view_ville.lb_ville.Substring(1);
+                        view_addresse.lb_rue = view_addresse.lb_rue.Replace(",", "");
+                        db.db_ville.Add(view_ville);
+                        db.db_addresse.Add(view_addresse);
+                    }
+                    else
+                    {
+                        view_addresse.lb_rue = view_addresse.lb_rue.Replace(",", "");
+                        db.db_ville.Attach(existingCity);
+                        existingCity.Adresses.Add(view_addresse);
                     }
 
-                    TypeCuisine existingCuisine = lstCuisine.FirstOrDefault(x => x.Id_Cuisine == int.Parse(typeCuisine));
-                    db.db_typecuisine.Attach(existingCuisine);
-                    existingCuisine.Restaurants.Add(view_newRestaurant);
+                    foreach (string typeCuisine in model.SelectedItemsCuisine)
+                    {
+                        TypeCuisine existingCuisine = linqCuisine.GetCuisineFirst(int.Parse(typeCuisine));
+                        db.db_typecuisine.Attach(existingCuisine);
+                        existingCuisine.Restaurants.Add(view_newRestaurant);
+                    }
+
+                    view_newRestaurant.Notations.Add(view_notation);
+
+                    db.SaveChanges();
                 }
-
-                await db.SaveChangesAsync();
-
                 return RedirectToAction("Index", "Home");
             }
 
-            model.ItemsCuisine = await GetAllCuisineList();
-
-            if (model.ItemsCuisine.Count() == 0)
-            {
-                return HttpNotFound();
-            }
+            model.ItemsCuisine = linqCuisine.GetAllCuisine();
 
             return View(model);
         }
 
-        public ActionResult Lister(string SearchString, int? page)
-        {
-            string[] splitSearchString = SearchString.Split(',');
-            string search_1 = splitSearchString[0];
-            string search_2 = string.Empty; 
-            string search_3 = string.Empty; 
 
-            if (splitSearchString.Count() > 1)
+
+        public ActionResult Lister(string SearchString,string currentFilter, int? page)
+        {
+            LinqRestaurant linqRestaurant = new LinqRestaurant();
+
+            int pageSize = 2;
+            int pageNumber = (page ?? 1);
+
+            if (TempData["Search"] != null && TempData["ResultSearch"] != null)
             {
-                search_2 = splitSearchString[1];
-                search_3 = splitSearchString[2];
+                ViewBag.CurrentFilter = TempData["Search"];
+                var result = (IEnumerable<ViewModelGroupRestaurants>)TempData["ResultSearch"];
+                return View(result.ToPagedList(pageNumber, pageSize));
+            }
+
+            if (SearchString != null)
+            {
+                page = 1;
             }
             else
             {
-                search_2 = search_1;
-                search_3 = search_1;
+                SearchString = currentFilter;
             }
 
-            List<ListerRestaurants> result = (from restaurant in db.db_restaurants
-                        from cuisine in restaurant.TypeCuisines
-                        join addresse in db.db_addresse on restaurant.Id_Restaurant equals addresse.RestaurantsId
-                        join ville in db.db_ville on addresse.VilleId equals ville.Id_Ville
-                        where restaurant.lb_nom.ToLower().Equals(search_1.ToLower())
-                        || addresse.lb_rue.ToLower().Equals(search_2.ToLower())
-                        || addresse.lb_codepostal.ToLower().Equals(search_3.ToLower())
-                        || ville.lb_ville.ToLower().Equals(search_3.ToLower())
-                                              select new ListerRestaurants()
-                         {
-                             Id = restaurant.Id_Restaurant,
-                             Nom = restaurant.lb_nom,
-                             Ville = ville.lb_ville,
-                             StrCuisine = cuisine.lb_cuisne
-                         }).ToList();
+            ViewBag.CurrentFilter = SearchString;
 
-            List<ListerRestaurants> gpResult =(from r_restaurant in result
-                           group r_restaurant by r_restaurant.Id into gp
-                           select new ListerRestaurants()
-                           {
-                               Id = gp.Key,
-                               Nom = gp.FirstOrDefault().Nom,
-                               Ville = gp.FirstOrDefault().Ville,
-                               //StrCuisine = gp.Select(s => s.StrCuisine).Aggregate((i, j) => i + ",  " + j),
-                               ListCuisine = gp.Select(s=>s.StrCuisine).ToList()
-                           }).ToList();
-
-            int pageSize = 3;
-            int pageNumber = (page ?? 1);
-
-            return View(gpResult.ToPagedList(pageNumber, pageSize));
-            //return View(gpResult);
-
+            if (!string.IsNullOrEmpty(SearchString))
+            {
+                var listerRestaurant = linqRestaurant.ListerRestaurants(SearchString);
+                var gpRestaurant = linqRestaurant.GroupRestaurant(listerRestaurant);
+                return View(gpRestaurant.ToPagedList(pageNumber, pageSize));
+            }
+            return RedirectToAction("Index", "Home");
         }
 
-        #region oldRequest
-        //public List<Ville> GetAllVilleList()
-        //{
-        //    var villes = db.db_ville.OrderBy(o => o.lb_ville);
-        //    return villes.ToList();
-        //}
+        public ActionResult Details(int id)
+        {
+            LinqRestaurant linqRestaurant = new LinqRestaurant();
+            LinqNoteEvaluation linqEvaluation = new LinqNoteEvaluation();
+            ViewModelDetailRestaurants model_details = new ViewModelDetailRestaurants();
+            ViewModelAllDetailRestaurants model_Alldetails = new ViewModelAllDetailRestaurants();
+            ViewModelEvaluation model_evaluation = new ViewModelEvaluation();
 
-        //public List<Ville> GetAllVilleList()
-        //{
-        //    var villes = db.db_ville.OrderBy(o => o.lb_ville);
-        //    return villes.ToList();
-        //}
+            if (TempData["RestaurantSearch"]!=null)
+            {
+                model_details = (ViewModelDetailRestaurants)TempData["RestaurantSearch"];
+            }
+            else
+            {
+                model_details = linqRestaurant.DetailsRestaurantByList(id);
+            }
 
-        //public JsonResult AutoCompleteGetVille(string term)
-        //{
-        //    var result = GetAllVilleList().Where(w => w.lb_ville.ToLower().Contains(term.ToLower())).Select(s => s.lb_ville);
-        //    return Json(result, JsonRequestBehavior.AllowGet);
-        //}
+            model_evaluation.nbDelicieux = linqEvaluation.getNbDelicieux(model_details.Id);
+            model_evaluation.percentDelicieux = (model_evaluation.nbDelicieux * 100)/2;
 
-        //public IEnumerable<TypeCuisine> GetAllCuisineList()
-        //{
-        //    var type_cuisine = db.db_typecuisine.OrderBy(o => o.lb_cuisne).ToList();
-        //    return type_cuisine;
-        //}
-        #endregion
-    }
+            model_evaluation.nbBon = linqEvaluation.getNbBon(model_details.Id);
+            model_evaluation.percentBon = (model_evaluation.nbBon*100)/ 2;
+
+            model_evaluation.nbAcceptable = linqEvaluation.getNbAcceptable(model_details.Id);
+            model_evaluation.percentAcceptable = (model_evaluation.nbAcceptable * 100) / 2;
+
+            model_evaluation.nbPassable = linqEvaluation.getNbPassable(model_details.Id);
+            model_evaluation.percentPassable = (model_evaluation.nbPassable * 100) / 2;
+
+            model_evaluation.nbMauvais= linqEvaluation.getNbPassable(model_details.Id);
+            model_evaluation.percentMauvais= (model_evaluation.nbMauvais * 100) / 2;
+
+            model_Alldetails.detailRestautants = model_details;
+            model_Alldetails.evaluationlRestautants = model_evaluation;
+
+
+            return View(model_Alldetails);
+        }
+    } 
 }

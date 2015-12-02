@@ -11,9 +11,9 @@ namespace RestoBook.Models
     {
         public Restaurants()
         {
-            //this.Villes = new HashSet<Ville>();
             this.TypeCuisines = new HashSet<TypeCuisine>();
             this.Adresses = new HashSet<Adresse>();
+            this.Notations = new HashSet<Notation>();
         }
 
         [Key]
@@ -33,9 +33,9 @@ namespace RestoBook.Models
 
         public bool isActive { get; set; }
 
-        //public virtual ICollection<Ville> Villes { get; set; }
         public virtual ICollection<TypeCuisine> TypeCuisines { get; set; }
         public virtual ICollection<Adresse> Adresses { get; set; }
+        public virtual ICollection<Notation> Notations { get; set; }
 
     }
 }

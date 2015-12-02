@@ -5,14 +5,14 @@ namespace RestoBook.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<RestoBook.Models.RestaurantDbContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<RestoBook.DAL.RestaurantDbContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(RestoBook.Models.RestaurantDbContext context)
+        protected override void Seed(RestoBook.DAL.RestaurantDbContext context)
         {
             //  This method will be called after migrating to the latest version.
 

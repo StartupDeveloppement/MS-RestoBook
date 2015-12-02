@@ -14,6 +14,7 @@ namespace RestoBook
 
             bundles.Add(new StyleBundle("~/Content/Css").Include(
             "~/Content/Css/bootstrap.min.css",
+            "~/Content/Css/font-awesome.css",
             "~/Content/Css/Site.css"));
 
             bundles.Add(new StyleBundle("~/Content/Css/jqueryui").Include(
@@ -22,8 +23,11 @@ namespace RestoBook
             "~/Content/themes/base/menu.css",
             "~/Content/themes/base/theme.css"));
 
-            bundles.Add(new StyleBundle("~/Content/Css/font-awesome").Include(
-            "~/Content/Css/font-awesome.css"));
+            bundles.Add(new StyleBundle("~/Content/Css/pagingList").Include(
+            "~/Content/Css/PagedList.css"));
+
+            bundles.Add(new StyleBundle("~/Content/Css/stars-rating").Include(
+            "~/Content/Css/star-rating.min.css"));
 
             bundles.Add(new StyleBundle("~/Content/Css/chosen").Include(
             "~/Content/Css/bootstrap-chosen.css"));
@@ -40,11 +44,14 @@ namespace RestoBook
             bundles.Add(new ScriptBundle("~/bundles/chosen").Include(
             "~/Scripts/chosen.jquery.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/homesearch").Include(
-            "~/Scripts/homesearch-autocomplete.js"));
+            bundles.Add(new ScriptBundle("~/bundles/myautocomplete").Include(
+            "~/Scripts/search-autocomplete.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
             "~/Scripts/jquery-ui-{version}.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/stars-rating").Include(
+            "~/Scripts/star-rating.js"));
 
         }
     }

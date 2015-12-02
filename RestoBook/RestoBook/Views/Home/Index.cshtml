@@ -2,63 +2,31 @@
 @{
     ViewBag.Title = "Index";
 }
+<div>
+    <img src="~/Content/Images/Screen-Shot-2015-11-19-at-2.01.32-PM.png" alt="home" class="img-responsive" />
+</div>
 
 <div class="container">
-    @using (Html.BeginForm("Lister", "Restaurant", FormMethod.Post))
+    @*@using (Html.BeginForm("SearchIndex", "Home", FormMethod.Get))
     {
         <div class="row">
             <div class="col-md-6 col-md-offset-3">
                 <div class="input-group">
-                    @Html.TextBox("SearchString", null, new { @class = "form-control", placeholder = "Ville, rue, nom du restaurant", required = "required" })
+                    @Html.TextBox("SearchString",ViewBag.CurrentFilter as string, new { @class = "form-control", placeholder = "Ville, rue, nom du restaurant", required = "required" })
                     <span class="input-group-btn">
                         <button type="submit" class="btn btn-default">Recherche</button>
                     </span>
                 </div>
             </div>
         </div>
-    }
+    }*@
+
+    @Html.Partial("_Search")
 </div>
 
-@section autocompletegetsearch{
-
+@*@section home{
     @Styles.Render("~/Content/Css/jqueryui")
     @Scripts.Render("~/bundles/jqueryui")
-    @Scripts.Render("~/bundles/homesearch")
+    @Scripts.Render("~/bundles/myautocomplete")
+}*@
 
-    @*<script type="text/javascript">
-        $(document).ready(function () {
-            $("#SearchString").autocomplete({
-                source: function (request, response) {
-                    $.ajax({
-                        url: "@(Url.Action("AutoCompleteGetSearch","Home"))",
-                        data: { term: request.term },
-                        success: function (data) {
-                            response($.map(data, function (item) {
-                                if (item.Nom.length > 0) {
-                                    return {
-                                        label: item.R_Adresse,
-                                        nomRestaurant: item.Nom,
-                                    };
-                                }
-                                //else {
-                                //    noemplacement:"Emplacement non repertorie",
-                                //}
-                            }));
-                        }
-                    });
-                }
-            }).autocomplete("instance")._renderItem = function (ul, item) {
-                if (item.nomRestaurant.length > 0) {
-                    return $("<li>")
-                    .append(item.nomRestaurant + "<br><i>" + item.label + '</i>')
-                    .appendTo(".ui-autocomplete ");
-                }
-                //else {
-                //    return $("<li>")
-                //    .append(item.nomRestaurant + "<br><i>" + item.label + '</i>')
-                //    .appendTo(".ui-autocomplete ");
-                //}
-            };
-        });
-    </script>*@  
-}

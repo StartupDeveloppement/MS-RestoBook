@@ -136,3 +136,7 @@ C:\Users\ines\Documents\Visual Studio 2015\Projects\MS-RestoBook\RestoBook\Resto
 C:\Users\ines\Documents\Visual Studio 2015\Projects\MS-RestoBook\RestoBook\RestoBook\obj\Debug\RestoBook.pdb
 C:\Users\ines\Documents\Visual Studio 2015\Projects\MS-RestoBook\RestoBook\RestoBook\obj\Debug\RestoBook.csprojResolveAssemblyReference.cache
 >>>>>>> 00d561f8c867af44d749394ed70dea7cc967cec9
+C:\Users\ines\Documents\Visual Studio 2015\Projects\MS-RestoBook\RestoBook\RestoBook\obj\Debug\RestoBook.Migrations.notation.resources
+C:\Users\ines\Documents\Visual Studio 2015\Projects\MS-RestoBook\RestoBook\RestoBook\obj\Debug\RestoBook.Migrations.modifNote.resources
+C:\Users\ines\Documents\Visual Studio 2015\Projects\MS-RestoBook\RestoBook\RestoBook\obj\Debug\RestoBook.Migrations.modifNote1.resources
+C:\Users\ines\Documents\Visual Studio 2015\Projects\MS-RestoBook\RestoBook\RestoBook\obj\Debug\RestoBook.Migrations.modifNote2.resources

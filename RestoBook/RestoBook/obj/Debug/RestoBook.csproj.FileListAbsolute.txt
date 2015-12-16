@@ -136,3 +136,15 @@ C:\Users\ines\Documents\Visual Studio 2015\Projects\MS-RestoBook\RestoBook\Resto
 C:\Users\ines\Documents\Visual Studio 2015\Projects\MS-RestoBook\RestoBook\RestoBook\obj\Debug\RestoBook.pdb
 C:\Users\ines\Documents\Visual Studio 2015\Projects\MS-RestoBook\RestoBook\RestoBook\obj\Debug\RestoBook.csprojResolveAssemblyReference.cache
 >>>>>>> 00d561f8c867af44d749394ed70dea7cc967cec9
+D:\Documents\Visual Studio 2015\Projects\MS-RestoBook\RestoBook\RestoBook\bin\Microsoft.AspNet.Identity.Core.dll
+D:\Documents\Visual Studio 2015\Projects\MS-RestoBook\RestoBook\RestoBook\bin\Microsoft.Owin.dll
+D:\Documents\Visual Studio 2015\Projects\MS-RestoBook\RestoBook\RestoBook\bin\Microsoft.Owin.Host.SystemWeb.dll
+D:\Documents\Visual Studio 2015\Projects\MS-RestoBook\RestoBook\RestoBook\bin\Microsoft.Owin.Security.Cookies.dll
+D:\Documents\Visual Studio 2015\Projects\MS-RestoBook\RestoBook\RestoBook\bin\Microsoft.Owin.Security.dll
+D:\Documents\Visual Studio 2015\Projects\MS-RestoBook\RestoBook\RestoBook\bin\Owin.dll
+D:\Documents\Visual Studio 2015\Projects\MS-RestoBook\RestoBook\RestoBook\bin\Microsoft.AspNet.Identity.Core.xml
+D:\Documents\Visual Studio 2015\Projects\MS-RestoBook\RestoBook\RestoBook\bin\Microsoft.Owin.xml
+D:\Documents\Visual Studio 2015\Projects\MS-RestoBook\RestoBook\RestoBook\bin\Microsoft.Owin.Host.SystemWeb.xml
+D:\Documents\Visual Studio 2015\Projects\MS-RestoBook\RestoBook\RestoBook\bin\Microsoft.Owin.Security.xml
+D:\Documents\Visual Studio 2015\Projects\MS-RestoBook\RestoBook\RestoBook\bin\Microsoft.Owin.Security.Cookies.xml
+D:\Documents\Visual Studio 2015\Projects\MS-RestoBook\RestoBook\RestoBook\obj\Debug\RestoBook.Migrations.InitialCreate.resources

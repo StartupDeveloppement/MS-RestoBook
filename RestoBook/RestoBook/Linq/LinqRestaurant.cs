@@ -23,9 +23,6 @@ namespace RestoBook.Linq
             }
         }
 
-
-
-
         public  List<ViewModelSearch> Search(string search)
         {
             using (var db = new RestaurantDbContext())

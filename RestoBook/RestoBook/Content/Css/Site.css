@@ -79,15 +79,29 @@ textarea {
 }
 
 /************************ Details ************************/
+
+.details{
+    background-color:#F5F5F5;
+}
+
+#details-restaurants .row .col-md-6 img{
+    width:100%;
+    height:auto;
+}
+
+#details-restaurants{
+    margin:20px 0px;
+    padding:0px;
+}
+
 .rating-num{
     margin-top:0px;
     font-size:54px;
 }
 
-.rating-desc .col-md-3{
+.rating-desc{
     padding-right:0px;
 }
-
 .fa-icon{
     margin-right:5px;
 }
@@ -101,9 +115,10 @@ textarea {
     clip:auto;
 }
 
-#details-restaurants{
-    margin-top:20px;
-    padding:0px;
+
+
+/*#details-evaluation{
+    padding:10px 10px 10px 0px;
 }
 
 #details-restaurants .row .col-md-6 img{
@@ -113,7 +128,8 @@ textarea {
 
 .details-cuisine{
     padding-right:5px;
-}
+}*/
+
 /************************ Lister ************************/
 #lssearch{
     margin-top:15px;

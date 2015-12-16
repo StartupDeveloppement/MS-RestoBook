@@ -24,6 +24,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -33,6 +34,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -41,6 +43,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Antlr3.Runtime, Version=3.5.0.2, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
@@ -100,26 +103,25 @@
       <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Optimization, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Xml.Linq" />
     <Reference Include="WebGrease, Version=1.6.5135.21930, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
       <Private>True</Private>
@@ -160,8 +162,16 @@
     <Content Include="Content\Css\bootstrap.css" />
     <Content Include="Content\Css\bootstrap.min.css" />
     <Content Include="Content\Css\Site.css" />
+    <Content Include="Content\Images\home_bordeaux.png" />
+    <Content Include="Content\Images\home_lille.png" />
+    <Content Include="Content\Images\home_lyon.png" />
+    <Content Include="Content\Images\home_marseille.png" />
+    <Content Include="Content\Images\home_paris.png" />
+    <Content Include="Content\Images\home_toulouse.png" />
     <Content Include="Content\Images\restaurant.jpg" />
-    <Content Include="Content\Images\Screen-Shot-2015-11-19-at-2.01.32-PM.png" />
+    <Content Include="Content\Images\slider-1.png" />
+    <Content Include="Content\Images\slider-2.png" />
+    <Content Include="Content\Images\slider-3.png" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
     <Content Include="Content\themes\base\autocomplete.css" />
@@ -215,6 +225,7 @@
     <Content Include="fonts\fontawesome-webfont.woff" />
     <Content Include="fonts\fontawesome-webfont.ttf" />
     <Content Include="fonts\fontawesome-webfont.eot" />
+    <None Include="Properties\PublishProfiles\restobook.pubxml" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\chosen.jquery.js" />
     <Content Include="Scripts\chosen.jquery.min.js" />
@@ -251,29 +262,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201511091426038_InitailCreate.cs" />
-    <Compile Include="Migrations\201511091426038_InitailCreate.Designer.cs">
-      <DependentUpon>201511091426038_InitailCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201511101339578_ActiveRestaurant.cs" />
-    <Compile Include="Migrations\201511101339578_ActiveRestaurant.Designer.cs">
-      <DependentUpon>201511101339578_ActiveRestaurant.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201511230934335_notation.cs" />
-    <Compile Include="Migrations\201511230934335_notation.Designer.cs">
-      <DependentUpon>201511230934335_notation.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201511240937363_modifNote.cs" />
-    <Compile Include="Migrations\201511240937363_modifNote.Designer.cs">
-      <DependentUpon>201511240937363_modifNote.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201511240940058_modifNote1.cs" />
-    <Compile Include="Migrations\201511240940058_modifNote1.Designer.cs">
-      <DependentUpon>201511240940058_modifNote1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201511240941593_modifNote2.cs" />
-    <Compile Include="Migrations\201511240941593_modifNote2.Designer.cs">
-      <DependentUpon>201511240941593_modifNote2.cs</DependentUpon>
+    <Compile Include="Migrations\201512161323203_InitialCreate.cs" />
+    <Compile Include="Migrations\201512161323203_InitialCreate.Designer.cs">
+      <DependentUpon>201512161323203_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Adresse.cs" />
@@ -326,23 +317,8 @@
     <Folder Include="Views\Register\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201511091426038_InitailCreate.resx">
-      <DependentUpon>201511091426038_InitailCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201511101339578_ActiveRestaurant.resx">
-      <DependentUpon>201511101339578_ActiveRestaurant.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201511230934335_notation.resx">
-      <DependentUpon>201511230934335_notation.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201511240937363_modifNote.resx">
-      <DependentUpon>201511240937363_modifNote.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201511240940058_modifNote1.resx">
-      <DependentUpon>201511240940058_modifNote1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201511240941593_modifNote2.resx">
-      <DependentUpon>201511240941593_modifNote2.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201512161323203_InitialCreate.resx">
+      <DependentUpon>201512161323203_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

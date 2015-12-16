@@ -4,29 +4,211 @@
 }
 
 <div class="container">
-    <div class="well well-sm">
+    <div class="row">
+        <div class="col-md-7">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-6 details">
+                            <img src="~/Content/Images/restaurant.jpg" alt="details-restaurants" />
+                        </div>
+                        <div class="col-md-6">
+                            <h3>@Html.DisplayFor(m => m.detailRestautants.Nom)</h3>
+                            <p>
+                                <i class="fa fa-map-marker fa-icon"></i>@Html.DisplayFor(m => m.detailRestautants.Adresse) @Html.DisplayFor(m => m.detailRestautants.CP)
+                                <span>@Html.DisplayFor(m => m.detailRestautants.Ville)</span>
+                            </p>
+                            <p>
+                                <i class="fa fa-cutlery fa-icon"></i>
+                                @foreach (var str_cuisine in Model.detailRestautants.Cuisine)
+                                {
+                                    <span class="details-cuisine">@Html.DisplayFor(m => str_cuisine)</span>
+                                }
+                            </p>
 
-        <div class="row">
-            <div class="col-md-5">
-                <img src="~/Content/Images/restaurant.jpg" width="100%" height="120px" />
+                            @if (!string.IsNullOrEmpty(Model.detailRestautants.Phone))
+                            {
+                                <p>
+                                    <i class="fa fa-phone fa-icon"></i>
+                                    <span>@Html.DisplayFor(m => m.detailRestautants.Phone)</span>
+                                </p>
+                            }
+                            @if (!string.IsNullOrEmpty(Model.detailRestautants.WebSite))
+                            {
+                                <p>
+                                    <i class="fa fa-laptop fa-icon"></i>
+                                    <span>@Html.DisplayFor(m => m.detailRestautants.WebSite)</span>
+                                </p>
+                            }
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="col-md-3">
-                <h3>@Html.DisplayFor(m => m.detailRestautants.Nom)</h3>
-                <p>
-                    <i class="fa fa-map-marker fa-icon"></i>@Html.DisplayFor(m => m.detailRestautants.Adresse) @Html.DisplayFor(m => m.detailRestautants.CP)
-                    @Html.DisplayFor(m => m.detailRestautants.Ville)
-                </p>
+        </div>
+        <div class="col-md-5">
+            Test Maps
+        </div>
+    </div>
+    @*<div class="row">
+        <div class="col-md-7">
+            <div class="row">
+                <div class="col-md-7 details" id="details-restaurants">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <img src="~/Content/Images/restaurant.jpg" alt="details-restaurants" />
+                        </div>
+                        <div class="col-md-6">
+                            <h3>@Html.DisplayFor(m => m.detailRestautants.Nom)</h3>
+                            <p>
+                                <i class="fa fa-map-marker fa-icon"></i>@Html.DisplayFor(m => m.detailRestautants.Adresse) @Html.DisplayFor(m => m.detailRestautants.CP)
+                                <span>@Html.DisplayFor(m => m.detailRestautants.Ville)</span>
+                            </p>
 
-                <p><i class="fa fa-cutlery fa-icon"></i>Cuisine</p>
+                            <p>
+                                <i class="fa fa-cutlery fa-icon"></i>
+                                @foreach (var str_cuisine in Model.detailRestautants.Cuisine)
+                                {
+                                    <span class="details-cuisine">@Html.DisplayFor(m => str_cuisine)</span>
+                                }
+                            </p>
 
-                @if (!string.IsNullOrEmpty(Model.detailRestautants.Phone))
-                {
-                    <p><i class="fa fa-phone fa-icon"></i>@Html.DisplayFor(m => m.detailRestautants.Phone)</p>
-                }
-                @if (!string.IsNullOrEmpty(Model.detailRestautants.WebSite))
-                {
-                    <p><i class="fa fa-laptop fa-icon"></i>@Html.DisplayFor(m => m.detailRestautants.WebSite)</p>
-                }
+                            @if (!string.IsNullOrEmpty(Model.detailRestautants.Phone))
+                            {
+                                <p>
+                                    <i class="fa fa-phone fa-icon"></i>
+                                    <span>@Html.DisplayFor(m => m.detailRestautants.Phone)</span>
+                                </p>
+                            }
+                            @if (!string.IsNullOrEmpty(Model.detailRestautants.WebSite))
+                            {
+                                <p>
+                                    <i class="fa fa-laptop fa-icon"></i>
+                                    <span>@Html.DisplayFor(m => m.detailRestautants.WebSite)</span>
+                                </p>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end row details restaurants -->
+            <div class="row">
+                <div class="col-md-7 details">
+                    <div class="row">
+                        <div class="col-md-5 text-center">
+                            <h1 class="rating-num">@Html.DisplayFor(m => m.detailRestautants.Notation)</h1>
+                            <div>
+                                @Html.TextBoxFor(m => m.detailRestautants.Notation, new { @type = "number", @id = "note" })
+                            </div>
+                            <div>
+                                <i class="fa fa-user fa-icon"></i>2 total
+                            </div>
+                        </div>
+                        <div class="col-md-7" id="details-evaluation">
+                            <div class="col-md-3 text-right rating-desc">
+                                Delicieux
+                            </div>
+                            <div class="col-md-9">
+                                <div class="progress progress-evaluation">
+                                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="@Html.DisplayFor(m=>m.evaluationlRestautants.percentDelicieux)" style="width:@Html.DisplayFor(m=>m.evaluationlRestautants.percentDelicieux)%">
+                                        <span class="sr-only sr-only-percent">@Html.DisplayFor(m => m.evaluationlRestautants.percentDelicieux)%</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end 5 -->
+                            <div class="col-md-3 text-right rating-desc">
+                                Bon
+                            </div>
+                            <div class="col-md-9">
+                                <div class="progress progress-evaluation">
+                                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="@Html.DisplayFor(m=>m.evaluationlRestautants.percentBon)" style="width:@Html.DisplayFor(m=>m.evaluationlRestautants.percentBon)%">
+                                        <span class="sr-only sr-only-percent">@Html.DisplayFor(m => m.evaluationlRestautants.percentBon)%</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end 4 -->
+                            <div class="col-md-3 text-right rating-desc">
+                                Acceptable
+                            </div>
+                            <div class="col-md-9">
+                                <div class="progress progress-evaluation">
+                                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="@Html.DisplayFor(m=>m.evaluationlRestautants.percentAcceptable)" style="width:@Html.DisplayFor(m=>m.evaluationlRestautants.percentAcceptable)%">
+                                        <span class="sr-only sr-only-percent">@Html.DisplayFor(m => m.evaluationlRestautants.percentAcceptable)%</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end 3 -->
+                            <div class="col-md-3 text-right rating-desc">
+                                Passable
+                            </div>
+                            <div class="col-md-9">
+                                <div class="progress progress-evaluation">
+                                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="@Html.DisplayFor(m=>m.evaluationlRestautants.percentPassable)" style="width:@Html.DisplayFor(m=>m.evaluationlRestautants.percentPassable)%">
+                                        <span class="sr-only sr-only-percent">@Html.DisplayFor(m => m.evaluationlRestautants.percentPassable)%</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end 2 -->
+                            <div class="col-md-3 text-right rating-desc">
+                                Mauvais
+                            </div>
+                            <div class="col-md-9">
+                                <div class="progress progress-evaluation">
+                                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="@Html.DisplayFor(m=>m.evaluationlRestautants.percentMauvais)" style="width:@Html.DisplayFor(m=>m.evaluationlRestautants.percentMauvais)%">
+                                        <span class="sr-only sr-only-percent">@Html.DisplayFor(m => m.evaluationlRestautants.percentMauvais)%</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end 1 -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end row evaluation restaurant -->
+        </div>
+        <div class="col-md-5">
+            test
+        </div>
+    </div>*@
+</div>
+
+@*<div class="row">
+        <div class="col-md-6">
+            <div class="well well-sm" id="details-restaurants">
+                <div class="row">
+                    <div class="col-md-6">
+                        <img src="~/Content/Images/restaurant.jpg" alt="details-restaurants" />
+                    </div>
+                    <div class="col-md-6">
+                        <h3>@Html.DisplayFor(m => m.detailRestautants.Nom)</h3>
+                        <p>
+                            <i class="fa fa-map-marker fa-icon"></i>@Html.DisplayFor(m => m.detailRestautants.Adresse) @Html.DisplayFor(m => m.detailRestautants.CP)
+                            <span>@Html.DisplayFor(m => m.detailRestautants.Ville)</span>
+                        </p>
+
+                        <p>
+                            <i class="fa fa-cutlery fa-icon"></i>
+                            @foreach (var str_cuisine in Model.detailRestautants.Cuisine)
+                            {
+                                <span class="details-cuisine">@Html.DisplayFor(m => str_cuisine)</span>
+                            }
+                        </p>
+
+                        @if (!string.IsNullOrEmpty(Model.detailRestautants.Phone))
+                        {
+                            <p>
+                                <i class="fa fa-phone fa-icon"></i>
+                                <span>@Html.DisplayFor(m => m.detailRestautants.Phone)</span>
+                            </p>
+                        }
+                        @if (!string.IsNullOrEmpty(Model.detailRestautants.WebSite))
+                        {
+                            <p>
+                                <i class="fa fa-laptop fa-icon"></i>
+                                <span>@Html.DisplayFor(m => m.detailRestautants.WebSite)</span>
+                            </p>
+                        }
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -106,8 +288,7 @@
                 </div>
             </div>
         </div>
-    </div>
-</div>
+    </div>*@
 
 
 
@@ -115,70 +296,7 @@
 
 
 
-@*<div class="container">
-    @Html.Partial("_Search", (string)ViewBag.CurrentFilter)
-    <h2>Details</h2>
-    @Html.DisplayFor(m => m.detailRestautants.Nom)
-    @Html.DisplayFor(m => m.detailRestautants.Adresse)
-    @Html.DisplayFor(m => m.detailRestautants.Ville)
-    @Html.DisplayFor(m => m.detailRestautants.CP)
-    @Html.TextBoxFor(m => m.detailRestautants.Notation, new { @type = "number", @id = "note" })
 
-
-    <div class="panel panel-primary">
-        <div class="panel-heading">
-            <h3 class="panel-title">Evaluation</h3>
-        </div>
-        <div class="panel-body">
-            <div class="row">
-                <span class="col-md-1">Délicieux</span>
-                <div class="progress">
-                    <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="20" style="width:@Html.DisplayFor(m=>m.evaluationlRestautants.percentDelicieux)%">
-                        <span class="sr-only">@Html.DisplayFor(m => m.evaluationlRestautants.percentDelicieux)%</span>
-                    </div>
-                </div>
-                <span class="col-md-1">@Html.DisplayFor(m => m.evaluationlRestautants.nbDelicieux)</span>
-            </div>
-
-            <div class="row">
-                <span class="col-md-1">Bon</span>
-                <div class="progress">
-                    <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="20" style="width:@Html.DisplayFor(m=>m.evaluationlRestautants.percentBon)%">
-                        <span class="sr-only">@Html.DisplayFor(m => m.evaluationlRestautants.percentBon)%</span>
-                    </div>
-                </div>@Html.DisplayFor(m => m.evaluationlRestautants.nbBon)
-            </div>
-
-            <div class="row">
-                <span class="col-md-1">Acceptable</span>
-                <div class="progress">
-                    <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="20" style="width:@Html.DisplayFor(m=>m.evaluationlRestautants.percentAcceptable)%">
-                        <span class="sr-only">@Html.DisplayFor(m => m.evaluationlRestautants.percentAcceptable)%</span>
-                    </div>
-                </div>@Html.DisplayFor(m => m.evaluationlRestautants.nbAcceptable)
-            </div>
-
-            <div class="row">
-                <span class="col-md-1">Passable</span>
-                <div class="progress">
-                    <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="20" style="width:@Html.DisplayFor(m=>m.evaluationlRestautants.percentPassable)%">
-                        <span class="sr-only">@Html.DisplayFor(m => m.evaluationlRestautants.percentPassable)%</span>
-                    </div>
-                </div>@Html.DisplayFor(m => m.evaluationlRestautants.nbPassable)
-            </div>
-
-            <div class="row">
-                <span class="col-md-1">Mauvais</span>
-                <div class="progress">
-                    <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="20" style="width:@Html.DisplayFor(m=>m.evaluationlRestautants.percentMauvais)%">
-                        <span class="sr-only">@Html.DisplayFor(m => m.evaluationlRestautants.percentMauvais)%</span>
-                    </div>
-                </div>@Html.DisplayFor(m => m.evaluationlRestautants.nbMauvais)
-            </div>
-        </div>
-    </div>
-
-</div>*@
 
 @section details{
     @Styles.Render("~/Content/Css/stars-rating")

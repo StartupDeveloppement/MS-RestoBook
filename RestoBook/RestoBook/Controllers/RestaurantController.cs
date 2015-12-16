@@ -146,6 +146,7 @@ namespace RestoBook.Controllers
             else
             {
                 model_details = linqRestaurant.DetailsRestaurantByList(id);
+                //linqRestaurant.GroupRestaurant()
             }
 
             model_evaluation.nbDelicieux = linqEvaluation.getNbDelicieux(model_details.Id);

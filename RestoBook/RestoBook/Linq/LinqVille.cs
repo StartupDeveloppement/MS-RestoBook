@@ -37,5 +37,21 @@ namespace RestoBook.Linq
             }
         }
 
+        public Dictionary<int,string> GetBigVille(string villeBig)
+        {
+            using(var db = new RestaurantDbContext())
+            {
+                var s_ville1 = from ville in db.db_ville
+                               where ville.lb_ville.Equals(villeBig)
+                               select new
+                               {
+                                   id = ville.Id_Ville,
+                                   s_ville = ville.lb_ville
+                               };
+
+                return s_ville1.ToDictionary(o=>o.id,o=>o.s_ville);
+            }
+        }
+
     }
 }

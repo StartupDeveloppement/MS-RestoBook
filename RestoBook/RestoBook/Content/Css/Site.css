@@ -79,15 +79,29 @@ textarea {
 }
 
 /************************ Details ************************/
+
+.details{
+    background-color:#F5F5F5;
+}
+
+#details-restaurants .row .col-md-6 img{
+    width:100%;
+    height:auto;
+}
+
+#details-restaurants{
+    margin:20px 0px;
+    padding:0px;
+}
+
 .rating-num{
     margin-top:0px;
     font-size:54px;
 }
 
-.rating-desc .col-md-3{
+.rating-desc{
     padding-right:0px;
 }
-
 .fa-icon{
     margin-right:5px;
 }
@@ -101,13 +115,33 @@ textarea {
     clip:auto;
 }
 
+
+
+/*#details-evaluation{
+    padding:10px 10px 10px 0px;
+}
+
+#details-restaurants .row .col-md-6 img{
+    width:100%;
+    height:auto;
+}
+
+.details-cuisine{
+    padding-right:5px;
+}*/
+
 /************************ Lister ************************/
 #lssearch{
     margin-top:15px;
     margin-bottom:30px
 }
 
-.lsRestaurant{
+.list-restaurant{
+    margin-bottom:20px;
+    background-color:#F5F5F5;
+}
+
+/*.lsRestaurant{
     background-color:#EDEDED;
 }
 
@@ -117,4 +151,19 @@ textarea {
 
 .content-restaurant{
     vertical-align:middle;
+}*/
+
+/************************ Home ************************/
+
+#carousel-home > .item > img{
+    height:500px;
+    width:100%;
+}
+
+#home_search{
+    margin:20px 0px;
+}
+
+.row .item-ville{
+    text-align:center;
 }

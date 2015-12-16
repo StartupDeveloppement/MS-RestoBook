@@ -10,5 +10,6 @@ namespace RestoBook.Models.ViewModels
     {
         public int Id { get; set; }
         public string Ville { get; set; }
+        public string Img { get; set; }
     }
 }

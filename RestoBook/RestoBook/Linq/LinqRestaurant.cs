@@ -61,6 +61,7 @@ namespace RestoBook.Linq
                              || addresse.lb_rue.ToLower().Trim().Equals(search.ToLower().Trim())
                              || addresse.lb_codepostal.ToLower().Trim().Equals(search.ToLower().Trim())
                              || ville.lb_ville.ToLower().Trim().Equals(search.ToLower().Trim()))
+                             || cuisine.lb_cuisne.ToLower().Trim().Equals(search.ToLower().Trim())
                              select new ViewModelListerRestaurants()
                              {
                                  Id = restaurant.Id_Restaurant,
@@ -96,23 +97,60 @@ namespace RestoBook.Linq
         {
             using(var db = new RestaurantDbContext())
             {
+                #region 
+                //var details = from restaurant in db.db_restaurants
+                //              from cuisine in restaurant.TypeCuisines
+                //              from note in restaurant.Notations
+                //              join addresse in db.db_addresse on restaurant.Id_Restaurant equals addresse.RestaurantsId
+                //              join ville in db.db_ville on addresse.VilleId equals ville.Id_Ville
+                //              where restaurant.Id_Restaurant == id
+                //              select new ViewModelDetailRestaurants()
+                //              {
+                //                  Id = restaurant.Id_Restaurant,
+                //                  Nom = restaurant.lb_nom,
+                //                  Notation = note.Note,
+                //                  Adresse = addresse.lb_rue,
+                //                  CP = addresse.lb_codepostal,
+                //                  Ville = ville.lb_ville,
+                //                  Cuisine = cuisine.lb_cuisne,
+                //                  Phone=restaurant.lb_tel,
+                //                  WebSite=restaurant.lb_web,
+                //              };
+                #endregion
                 var details = from restaurant in db.db_restaurants
                               from cuisine in restaurant.TypeCuisines
                               from note in restaurant.Notations
                               join addresse in db.db_addresse on restaurant.Id_Restaurant equals addresse.RestaurantsId
                               join ville in db.db_ville on addresse.VilleId equals ville.Id_Ville
                               where restaurant.Id_Restaurant == id
-                              select new ViewModelDetailRestaurants()
+                              select new
                               {
                                   Id = restaurant.Id_Restaurant,
                                   Nom = restaurant.lb_nom,
                                   Notation = note.Note,
                                   Adresse = addresse.lb_rue,
                                   CP = addresse.lb_codepostal,
-                                  Ville = ville.lb_ville
+                                  Ville = ville.lb_ville,
+                                  Cuisine = cuisine.lb_cuisne,
+                                  Phone = restaurant.lb_tel,
+                                  WebSite = restaurant.lb_web,
                               };
 
-                return details.FirstOrDefault();
+                var group_details = from gpRestaurant in details
+                         group gpRestaurant by gpRestaurant.Id into gp
+                                    select new ViewModelDetailRestaurants()
+                                    {
+                                        Id = gp.Key,
+                                        Nom = gp.FirstOrDefault().Nom,
+                                        Ville = gp.FirstOrDefault().Ville,
+                                        Notation = gp.Sum(s => s.Notation),
+                                        Adresse = gp.FirstOrDefault().Adresse,
+                                        CP = gp.FirstOrDefault().CP,
+                                        Cuisine = gp.Select(s=>s.Cuisine).ToList(),
+                                        Phone = gp.FirstOrDefault().Phone,
+                                        WebSite = gp.FirstOrDefault().WebSite,
+                                    };
+                return group_details.FirstOrDefault();
 
             }
         }
@@ -130,17 +168,34 @@ namespace RestoBook.Linq
                               where restaurant.isActive && restaurant.lb_nom.Trim().ToLower().Equals(s_nom.Trim().ToLower())
                               && addresse.lb_rue.Trim().ToLower().Equals(s_rue.Trim().ToLower())
                               && ville_cp.Equals(s_ville_cp.Trim().ToLower())
-                              select new ViewModelDetailRestaurants()
+                              select new
                               {
                                   Id = restaurant.Id_Restaurant,
                                   Nom = restaurant.lb_nom,
                                   Notation = note.Note,
                                   Adresse = addresse.lb_rue,
                                   CP = ville_cp,
+                                  Ville = ville.lb_ville,
+                                  Cuisine = cuisine.lb_cuisne,
+                                  Phone = restaurant.lb_tel,
+                                  WebSite = restaurant.lb_web,
                               };
 
-                return details.FirstOrDefault();
-
+                var group_details = from gpRestaurant in details
+                                    group gpRestaurant by gpRestaurant.Id into gp
+                                    select new ViewModelDetailRestaurants()
+                                    {
+                                        Id = gp.Key,
+                                        Nom = gp.FirstOrDefault().Nom,
+                                        Ville = gp.FirstOrDefault().Ville,
+                                        Notation = gp.Sum(s => s.Notation),
+                                        Adresse = gp.FirstOrDefault().Adresse,
+                                        CP = gp.FirstOrDefault().CP,
+                                        Cuisine = gp.Select(s => s.Cuisine).ToList(),
+                                        Phone = gp.FirstOrDefault().Phone,
+                                        WebSite = gp.FirstOrDefault().WebSite,
+                                    };
+                return group_details.FirstOrDefault();
             }
         }
 

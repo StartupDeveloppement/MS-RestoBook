@@ -17,5 +17,8 @@ namespace RestoBook.Models.ViewModels
         public double Notation { get; set; }
         public string Phone { get; set; }
         public string WebSite { get; set; }
+        public List<string> Cuisine { get; set; }
+
+
     }
 }

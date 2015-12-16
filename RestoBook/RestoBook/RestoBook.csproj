@@ -160,8 +160,16 @@
     <Content Include="Content\Css\bootstrap.css" />
     <Content Include="Content\Css\bootstrap.min.css" />
     <Content Include="Content\Css\Site.css" />
+    <Content Include="Content\Images\home_bordeaux.png" />
+    <Content Include="Content\Images\home_lille.png" />
+    <Content Include="Content\Images\home_lyon.png" />
+    <Content Include="Content\Images\home_marseille.png" />
+    <Content Include="Content\Images\home_paris.png" />
+    <Content Include="Content\Images\home_toulouse.png" />
     <Content Include="Content\Images\restaurant.jpg" />
-    <Content Include="Content\Images\Screen-Shot-2015-11-19-at-2.01.32-PM.png" />
+    <Content Include="Content\Images\slider-1.png" />
+    <Content Include="Content\Images\slider-2.png" />
+    <Content Include="Content\Images\slider-3.png" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
     <Content Include="Content\themes\base\autocomplete.css" />

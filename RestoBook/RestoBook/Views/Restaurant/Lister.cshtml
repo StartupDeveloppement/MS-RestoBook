@@ -13,7 +13,7 @@
         </div>
     </div>
    
-    <div class="row">
+    @*<div class="row">
         <div class="col-md-4">
             <p>block search</p>
         </div>
@@ -33,7 +33,7 @@
                             Cuisine:
                             @foreach (var itemCuisine in item.DictCuisine)
                             {
-                                <a href="@Url.Action("ListerRestaurantCuisine","Restaurant", new { id = itemCuisine.Key })">@Html.DisplayFor(m => itemCuisine.Value)</a>
+                                <a href="@Url.Action("Lister","Restaurant", new { search = itemCuisine.Value })">@Html.DisplayFor(m => itemCuisine.Value)</a>
                             }
                         </span>
 
@@ -41,7 +41,45 @@
                 </div>
             }
         </div>
+    </div>*@
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-4">
+                    search option
+                </div>
+                <div class="col-md-8">
+                    @foreach(var item in Model)
+                    {
+                        <div class="row">
+                            <div class="col-md-12 list-restaurant">
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <a href="@Url.Action("Details","Restaurant", new { id = item.Id })">
+                                            <img class="img-responsive" alt="te" src="~/Content/Images/restaurant.jpg" />
+                                        </a>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <h4><a href="@Url.Action("Details","Restaurant", new { id = item.Id })">@Html.DisplayFor(m => item.Nom)</a></h4>
+                                        <span>@Html.TextBoxFor(m => item.Notation, new { @type = "number", @class = "note" })</span>
+                                        <span>
+                                            Cuisine:
+                                            @foreach (var itemCuisine in item.DictCuisine)
+                                            {
+                                                <a href="@Url.Action("Lister","Restaurant", new { search = itemCuisine.Value })">@Html.DisplayFor(m => itemCuisine.Value)</a>
+                                            }
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
     </div>
+    
     @Html.PagedListPager(Model, page => Url.Action("Lister",
     new { page, currentFilter = ViewBag.CurrentFilter }))
 </div>

@@ -90,7 +90,7 @@ namespace RestoBook.Linq
         }
 
 
-        public ViewModelDetailRestaurants DetailsRestaurantByList (int id)
+        public ViewModelDetailRestaurants DetailsRestaurantByList (int? id)
         {
             using(var db = new RestaurantDbContext())
             {

@@ -14,11 +14,25 @@ namespace RestoBook
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            //routes.MapRouteLowercase(
+            //    name: "SearchVille",
+            //    url: "Restaurant/{action}/Ville/{search}",
+            //    defaults: new { controller = "Restaurant", action = "Lister", search = UrlParameter.Optional }
+            //);
+
+            //routes.MapRouteLowercase(
+            //    name: "SearccC",
+            //    url: "Restaurant/{search}/{action}",
+            //    defaults: new { controller = "Restaurant", action = "Lister", search = UrlParameter.Optional }
+            //);
+
             routes.MapRouteLowercase(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+
+
         }
     }
 }

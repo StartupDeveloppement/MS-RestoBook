@@ -2,9 +2,6 @@
 @{
     ViewBag.Title = "Index";
 }
-@*<div id="home_img">
-    <img src="~/Content/Images/Screen-Shot-2015-11-19-at-2.01.32-PM.png" alt="home" class="img-responsive" />
-</div>*@
 
 <div id="carousel-slide-home" class="carousel slide" data-ride="carousel">
     <!-- Indicators -->
@@ -17,7 +14,7 @@
     <!-- Wrapper for slides -->
     <div class="carousel-inner" id="carousel-home" role="listbox">
         <div class="item active">
-            <img src="~/Content/Images/slider-1.png" alt="slide1">
+            <img src="~/Content/Images/slider-1.png" alt="slide1" class="img-responsive">
         </div>
         <div class="item">
             <img src="~/Content/Images/slider-2.png" alt="slide2">
@@ -39,24 +36,25 @@
 </div>
 
 <div class="container">
-    <div id="home_search">
-        @Html.Partial("_Search")
-    </div>
+    <div class="content">
+        <div id="home_search">
+            @Html.Partial("_Search")
+        </div>
 
-    <div class="row">
-        @foreach (var item in Model)
-        {
-            <div class="col-md-4 item-ville">
-                <a href="@Url.Action("Lister","Restaurant", new { search = item.Ville })" class="thumbnail">
-                    <img src="~/Content/Images/@item.Img" alt="@item.Img" />
-                    <div class="carousel-caption">
-                        <h1>@item.Ville</h1>
+        <div class="row">
+            @foreach (var item in Model)
+            {
+
+                <div class="col-md-4">
+                    <div class="thumbnail-box">
+                        <a href="@Url.Action("Lister","Restaurant", new { search = item.Ville })">
+                            <img src="~/Content/Images/@item.Img" alt="@item.Img" class="img-responsive" />
+                            <h3>@item.Ville</h3>
+                        </a>
                     </div>
-                </a>
-            </div>
-        }
+
+                </div>
+            }
+        </div>
     </div>
 </div>
-
-
-

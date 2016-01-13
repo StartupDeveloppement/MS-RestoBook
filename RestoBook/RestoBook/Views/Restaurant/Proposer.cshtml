@@ -5,68 +5,93 @@
 }
 
 <div class="container">
-    @using (Html.BeginForm("Proposer", "Restaurant", FormMethod.Post))
-    {
-        @Html.AntiForgeryToken()
+    <div class="content">
+        <div class="row">
+            <div class="bgblock divform">
+                <h4>Proposer un rerstaurant</h4>
+                <hr />
+                @using (Html.BeginForm("Proposer", "Restaurant", FormMethod.Post))
+            {
+                    @Html.AntiForgeryToken()
 
-        <h4>ViewModelRestaurant</h4>
-        <hr />
+                    @Html.ValidationSummary(false, "", new { @class = "alert alert-danger" })
 
-        @Html.ValidationSummary(false, "", new { @class = "alert alert-danger" })
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-8">
+                                @Html.LabelFor(m => m.m_restaurant.lb_nom, new { @class = "control-label" })
+                                @Html.TextBoxFor(m => m.m_restaurant.lb_nom, new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(m => m.m_restaurant.lb_nom, new { @class = "control-label" })
-            @Html.TextBoxFor(m => m.m_restaurant.lb_nom, new { @class = "form-control" })
-        </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-8">
+                                @Html.LabelFor(m => m.m_typecuisne.lb_cuisne, new { @class = "control-label" })
+                                @Html.ListBoxFor(m => m.SelectedItemsCuisine, new MultiSelectList(Model.ItemsCuisine, "Id_Cuisine", "lb_cuisne"), new { @class = "form-control chosen-select", data_placeholder = "Choisir" })
+                            </div>
+                        </div>
+                    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(m => m.m_typecuisne.lb_cuisne, new { @class = "control-label" })
-            @Html.ListBoxFor(m => m.SelectedItemsCuisine, new MultiSelectList(Model.ItemsCuisine, "Id_Cuisine", "lb_cuisne"), new { @class = "form-control chosen-select", data_placeholder = "Choisir" })
-        </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-8">
+                                @Html.LabelFor(m => m.m_ville.lb_ville, new { @class = "control-label" })
+                                @Html.TextBoxFor(m => m.m_ville.lb_ville, new { @class = "form-control" })
+                                <div class="checkbox">
+                                    <label>
+                                        @Html.CheckBox("EmptyVille")
+                                        Votre ville n'est pas dans la liste
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(m => m.m_ville.lb_ville, new { @class = "control-label" })
-            @Html.TextBoxFor(m => m.m_ville.lb_ville, new { @class = "form-control" })
-            <div class="checkbox">
-                <label>
-                    @Html.CheckBox("EmptyVille")
-                    Votre ville n'est pas dans la liste
-                </label>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-4">
+                                @Html.LabelFor(m => m.m_adresse.lb_rue, new { @class = "control-label" })
+                                @Html.TextBoxFor(m => m.m_adresse.lb_rue, new { @class = "form-control" })
+                            </div>
+                            <div class="col-md-4">
+                                @Html.LabelFor(m => m.m_adresse.lb_codepostal, new { @class = "control-label" })
+                                @Html.TextBoxFor(m => m.m_adresse.lb_codepostal, new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-8">
+                                @Html.LabelFor(m => m.m_restaurant.lb_web, new { @class = "control-label" })
+                                @Html.TextBoxFor(m => m.m_restaurant.lb_web, new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-8">
+                                @Html.LabelFor(m => m.m_restaurant.lb_tel, new { @class = "control-label" })
+                                @Html.TextBoxFor(m => m.m_restaurant.lb_tel, new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.TextBoxFor(m => m.m_notation.Note, new { id = "note-restaurant", @type = "number" })
+                    </div>
+
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-default">Soumettre</button>
+                    </div>
+
+                }
             </div>
         </div>
-
-        <div class="form-group">
-            <div class="row">
-                <div class="col-md-4">
-                    @Html.LabelFor(m => m.m_adresse.lb_rue, new { @class = "control-label" })
-                    @Html.TextBoxFor(m => m.m_adresse.lb_rue, new { @class = "form-control" })
-                </div>
-                <div class="col-md-4">
-                    @Html.LabelFor(m => m.m_adresse.lb_codepostal, new { @class = "control-label" })
-                    @Html.TextBoxFor(m => m.m_adresse.lb_codepostal, new { @class = "form-control" })
-                </div>
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(m => m.m_restaurant.lb_web, new { @class = "control-label" })
-            @Html.TextBoxFor(m => m.m_restaurant.lb_web, new { @class = "form-control" })
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(m => m.m_restaurant.lb_tel, new { @class = "control-label" })
-            @Html.TextBoxFor(m => m.m_restaurant.lb_tel, new { @class = "form-control" })
-        </div>
-
-        <div class="form-group">
-            @Html.TextBoxFor(m=>m.m_notation.Note,new { id= "note-restaurant",@type="number" })
-        </div>
-
-        <div class="form-group">
-            <button type="submit" class="btn btn-default">Soumettre</button>
-        </div>
-
-    }
+    </div>
 </div>
 @section proposer{
     @Styles.Render("~/Content/Css/chosen")
@@ -90,12 +115,12 @@
                 'showCaption': true,
                 'starCaptions':
                 {
-                    0:'Votre vote',
-                    1:'Dégoutant',
-                    2:'Passable',
-                    3:'Acceptable',
-                    4:'Bon',
-                    5:'Délicieux'
+                    0: 'Votre vote',
+                    1: 'Dégoutant',
+                    2: 'Passable',
+                    3: 'Acceptable',
+                    4: 'Bon',
+                    5: 'Délicieux'
                 }
             });
         });

@@ -53,6 +53,13 @@ namespace RestoBook
             bundles.Add(new ScriptBundle("~/bundles/stars-rating").Include(
             "~/Scripts/star-rating.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/google-maps").Include(
+            "~/Scripts/google-maps.js"));
+
+            
+            BundleTable.EnableOptimizations = false;
+
+
         }
     }
 }

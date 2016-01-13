@@ -86,6 +86,22 @@ namespace RestoBook.Controllers
             return View(model);
         }
 
+        [ChildActionOnly]
+        public ActionResult _Filter()
+        {
+            ViewModelFilter filter = new ViewModelFilter();
+            LinqCuisine linqCuisine = new LinqCuisine();
+            var result = linqCuisine.GetAllCuisine();
+            List<ViewModelFilter> lstFilterCuisine = new List<ViewModelFilter>();
+            foreach (var item in result)
+            {
+                lstFilterCuisine.Add(
+                    new ViewModelFilter() { Checked = false, Id=item.Id_Cuisine,Value=item.lb_cuisne }
+                );
+            }
+            return PartialView(lstFilterCuisine);
+        }
+
         public ActionResult Lister(string search, string currentFilter, int? page)
         {
             LinqRestaurant linqRestaurant = new LinqRestaurant();
@@ -121,17 +137,17 @@ namespace RestoBook.Controllers
             return RedirectToAction("Index","Home");
         }
 
-        public ActionResult ListerRestaurantCuisine(int id,int? page)
-        {
-            LinqRestaurant linqRestaurant = new LinqRestaurant();
-            int pageSize = 2;
-            int pageNumber = (page ?? 1);
-            var lsrestaurantcuisine = linqRestaurant.ListerRestaurantByCuisine(id);
-            var gpRestaurant = linqRestaurant.GroupRestaurant(lsrestaurantcuisine);
-            return View(gpRestaurant.ToPagedList(pageNumber,pageSize));
-        }
+        //public ActionResult ListerRestaurantCuisine(int id,int? page)
+        //{
+        //    LinqRestaurant linqRestaurant = new LinqRestaurant();
+        //    int pageSize = 2;
+        //    int pageNumber = (page ?? 1);
+        //    var lsrestaurantcuisine = linqRestaurant.ListerRestaurantByCuisine(id);
+        //    var gpRestaurant = linqRestaurant.GroupRestaurant(lsrestaurantcuisine);
+        //    return View(gpRestaurant.ToPagedList(pageNumber,pageSize));
+        //}
 
-        public ActionResult Details(int id)
+        public ActionResult Details(int? id)
         {
             LinqRestaurant linqRestaurant = new LinqRestaurant();
             LinqNoteEvaluation linqEvaluation = new LinqNoteEvaluation();
@@ -146,7 +162,6 @@ namespace RestoBook.Controllers
             else
             {
                 model_details = linqRestaurant.DetailsRestaurantByList(id);
-                //linqRestaurant.GroupRestaurant()
             }
 
             model_evaluation.nbDelicieux = linqEvaluation.getNbDelicieux(model_details.Id);
@@ -166,7 +181,6 @@ namespace RestoBook.Controllers
 
             model_Alldetails.detailRestautants = model_details;
             model_Alldetails.evaluationlRestautants = model_evaluation;
-
 
             return View(model_Alldetails);
         }

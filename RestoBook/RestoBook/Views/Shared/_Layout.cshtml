@@ -4,68 +4,65 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>              
+    <title>@ViewBag.Title - RestoBook</title>              
     @Styles.Render("~/Content/Css")
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top" id="bgheader">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("RestoBook", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav navigation">
-                    <li class="@(ViewBag.Title.Equals("Index") ? "active" : "" )">@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li class="@(ViewBag.Title.Equals("Tops") ? "active" : "" )">@Html.ActionLink("Tops", "", "")</li>
-                    <li class="@(ViewBag.Title.Equals("Promotions") ? "active" : "" )">@Html.ActionLink("Promotions", "", "")</li>
-                    <li class="@(ViewBag.Title.Equals("Evénements") ? "active" : "" )">@Html.ActionLink("Evénements", "", "")</li>
-                    <li class="@(ViewBag.Title.Equals("Proposer") ? "active" : "" )">@Html.ActionLink("Proposer", "Proposer", "Restaurant")</li>
-                   
-
-
-                </ul>
-                <ul class="nav navbar-nav navbar-right navigation" id="navLogin">
-                    @if (Request.IsAuthenticated)
-                    {
-                        var claimIdentity = User.Identity as ClaimsIdentity;
-                        var homeLinkText = "";
-                        if (claimIdentity != null)
+    <div id="page">
+        <div class="navbar navbar-inverse navbar-fixed-top" id="bgheader">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    @Html.ActionLink("RestoBook", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav navigation">
+                        <li class="@(ViewBag.Title.Equals("Index") ? "active" : "" )">@Html.ActionLink("Home", "Index", "Home")</li>
+                        <li class="@(ViewBag.Title.Equals("Tops") ? "active" : "" )">@Html.ActionLink("Tops", "", "")</li>
+                        <li class="@(ViewBag.Title.Equals("Promotions") ? "active" : "" )">@Html.ActionLink("Promotions", "", "")</li>
+                        <li class="@(ViewBag.Title.Equals("Evénements") ? "active" : "" )">@Html.ActionLink("Evénements", "", "")</li>
+                        <li class="@(ViewBag.Title.Equals("Proposer") ? "active" : "" )">@Html.ActionLink("Proposer", "Proposer", "Restaurant")</li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right navigation" id="navLogin">
+                        @if (Request.IsAuthenticated)
                         {
-                            homeLinkText = "Bonjour, " + claimIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
+                            var claimIdentity = User.Identity as ClaimsIdentity;
+                            var homeLinkText = "";
+                            if (claimIdentity != null)
+                            {
+                                homeLinkText = "Bonjour, " + claimIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
+                            }
+                            @Html.ActionLink(homeLinkText, "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                            <li>@Html.ActionLink("Se déconnecter", "Logout", "Authentication")</li>
                         }
-                        @Html.ActionLink(homeLinkText, "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-                        <li>@Html.ActionLink("Se déconnecter", "Logout", "Authentication")</li>
-                    }
-                    else
-                    {
-
-
-                    <li>@Html.ActionLink("Sign in", "", "")</li>
-                    
-                    <li>
-                        @Html.ActionLink("Login", "Login", "Authentication")
-                        @*<a href="#" class="dropdown-toggle" data-toggle="dropdown">Login</a>
-                        @Html.Partial("_Login")*@
-                    </li>
-                    }
-                </ul>
+                        else
+                        {
+                            <li>@Html.ActionLink("Sign in", "", "")</li>
+                            <li>@Html.ActionLink("Login", "Login", "Authentication")</li>
+                        }
+                    </ul>
+                </div>
             </div>
         </div>
+
+        @RenderBody()
     </div>
-    @RenderBody()
-    <div class="container">
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+
+        <footer class="footer">
+            <div class="container">
+                <p>&copy; @DateTime.Now.Year - RestoBook</p>
+                <ul>
+                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                </ul>
+            </div>
         </footer>
-    </div>
+
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("proposer", required: false)
     @RenderSection("lister", required: false)

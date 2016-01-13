@@ -1,87 +1,57 @@
 ﻿@model PagedList.IPagedList<RestoBook.Models.ViewModels.ViewModelGroupRestaurants>
 @using PagedList.Mvc;
+
 <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 @{
     ViewBag.Title = "Lister";
 }
 
 <div class="container">
-    @*@Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-control", placeholder = "Ville, rue, nom du restaurant", required = "required" })*@
-    <div id="lssearch">
+    <div class="content">
         <div class="row">
-            @Html.Partial("_Search", (string)ViewBag.CurrentFilter)
-        </div>
-    </div>
-   
-    @*<div class="row">
-        <div class="col-md-4">
-            <p>block search</p>
-        </div>
-        <div class="col-md-8">
-            @foreach (var item in Model)
+            <div class="col-md-4">
+                @Html.Action("_Filter")
+            </div>
+
+            <section class="col-md-8">
+                Section
+                <div class="row">
+                    @foreach (var item in Model)
             {
-                <div class="media lsRestaurant">
-                    <div class="media-left">
-                        <a href="@Url.Action("Details","Restaurant", new { id = item.Id })">
-                            <img class="media-object" alt="te" src="~/Content/Images/restaurant.jpg" />
-                        </a>
-                    </div>
-                    <div class="media-body content-restaurant">
-                        <h4 class="media-heading"><a href="@Url.Action("Details","Restaurant", new { id = item.Id })">@Html.DisplayFor(m => item.Nom)</a></h4>
-                        <span>@Html.TextBoxFor(m => item.Notation, new { @type = "number", @class = "note" })</span>
-                        <span>
-                            Cuisine:
-                            @foreach (var itemCuisine in item.DictCuisine)
-                            {
-                                <a href="@Url.Action("Lister","Restaurant", new { search = itemCuisine.Value })">@Html.DisplayFor(m => itemCuisine.Value)</a>
-                            }
-                        </span>
-
-                    </div>
-                </div>
-            }
-        </div>
-    </div>*@
-
-    <div class="row">
-        <div class="col-md-12">
-            <div class="row">
-                <div class="col-md-4">
-                    search option
-                </div>
-                <div class="col-md-8">
-                    @foreach(var item in Model)
-                    {
                         <div class="row">
-                            <div class="col-md-12 list-restaurant">
-                                <div class="row">
-                                    <div class="col-md-5">
-                                        <a href="@Url.Action("Details","Restaurant", new { id = item.Id })">
-                                            <img class="img-responsive" alt="te" src="~/Content/Images/restaurant.jpg" />
-                                        </a>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <h4><a href="@Url.Action("Details","Restaurant", new { id = item.Id })">@Html.DisplayFor(m => item.Nom)</a></h4>
-                                        <span>@Html.TextBoxFor(m => item.Notation, new { @type = "number", @class = "note" })</span>
-                                        <span>
-                                            Cuisine:
-                                            @foreach (var itemCuisine in item.DictCuisine)
-                                            {
-                                                <a href="@Url.Action("Lister","Restaurant", new { search = itemCuisine.Value })">@Html.DisplayFor(m => itemCuisine.Value)</a>
-                                            }
-                                        </span>
+                            <div class="col-md-12">
+                                <div class="bgblock list-restaurant">
+                                    <div class="row">
+                                        <div class="col-md-5">
+                                            <a href="@Url.Action("Details", "Restaurant", new { id = item.Id })">
+                                                <img class="img-responsive" alt="te" src="~/Content/Images/restaurant.jpg" />
+                                            </a>
+                                        </div>
+                                        <div class="col-md-7">
+                                            <h4><a href="@Url.Action("Details","Restaurant", new { id = item.Id })">@Html.DisplayFor(m => item.Nom)</a></h4>
+                                            <span>@Html.TextBoxFor(m => item.Notation, new { @type = "number", @class = "note" })</span>
+                                            <span>
+                                                Cuisine:
+                                                @foreach (var itemCuisine in item.DictCuisine)
+                                                {
+                                                    <a href="@Url.Action("Lister","Restaurant", new { search = itemCuisine.Value })">@Html.DisplayFor(m => itemCuisine.Value)</a>
+                                                }
+                                            </span>
+                                        </div>
+
                                     </div>
                                 </div>
                             </div>
                         </div>
                     }
                 </div>
-            </div>
+                <div class="row">
+                    @Html.PagedListPager(Model, page => Url.Action("Lister",
+                            new { page, currentFilter = ViewBag.CurrentFilter }))
+                </div>
+            </section>
         </div>
     </div>
-    
-    @Html.PagedListPager(Model, page => Url.Action("Lister",
-    new { page, currentFilter = ViewBag.CurrentFilter }))
 </div>
 
 @section lister{
@@ -97,6 +67,7 @@
                 'showCaption': false,
                 'size': 'xs',
             });
+            $("#toggleType").accordion();
         });
     </script>
 }

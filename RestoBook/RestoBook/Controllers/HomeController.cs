@@ -1,9 +1,12 @@
 ﻿using RestoBook.Linq;
+using RestoBook.Models;
 using RestoBook.Models.ViewModels;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mail;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using System.Net;
 
 namespace RestoBook.Controllers
 {
@@ -61,6 +64,44 @@ namespace RestoBook.Controllers
             var resultRestaurant = linqRestaurant.Search(term.ToLower());
             var result = resultVille.Union<object>(resultRestaurant);
             return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult Contact()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Contact(Contact model)
+        {
+            if (ModelState.IsValid)
+            {
+                var message = new MailMessage();
+                //message.From = new MailAddress(model.FromEmail);
+                message.To.Add(new MailAddress("ingesup.test@gmail.com"));
+                message.Body = model.Message;
+                message.Subject = "Contact";
+                message.IsBodyHtml = true;
+
+                using (var smtp = new SmtpClient())
+                {
+                    //smtp.Host = "smtp.gmail.com";
+                    //smtp.Port = 587;
+                    //smtp.EnableSsl = true;
+                    //smtp.Credentials = new NetworkCredential("ingesup.test@gmail.com", "ingesuptest");
+
+                    await smtp.SendMailAsync(message);
+                    return RedirectToAction("Sent");
+                }
+            }
+            else
+                return View();
+        }
+
+        public ActionResult Sent()
+        {
+            return View();
         }
     }
 }

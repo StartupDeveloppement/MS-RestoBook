@@ -229,6 +229,8 @@
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\chosen.jquery.js" />
     <Content Include="Scripts\chosen.jquery.min.js" />
+    <Content Include="Scripts\google-maps.js" />
+    <Content Include="Scripts\readmore.js" />
     <Content Include="Scripts\search-autocomplete.js" />
     <Content Include="Scripts\jquery-2.1.4.js" />
     <Content Include="Scripts\jquery-2.1.4.min.js" />
@@ -250,6 +252,7 @@
     <Compile Include="App_Start\AuthConfig.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="GoogleAPI\DataService.cs" />
     <Compile Include="Linq\LinqNoteEvaluation.cs" />
     <Compile Include="Linq\LinqRestaurant.cs" />
     <Compile Include="Linq\LinqVille.cs" />
@@ -260,13 +263,14 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201512161323203_InitialCreate.cs" />
-    <Compile Include="Migrations\201512161323203_InitialCreate.Designer.cs">
-      <DependentUpon>201512161323203_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\201601041415196_InitialToCreate.cs" />
+    <Compile Include="Migrations\201601041415196_InitialToCreate.Designer.cs">
+      <DependentUpon>201601041415196_InitialToCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Adresse.cs" />
     <Compile Include="DAL\RestaurantDbContext.cs" />
+    <Compile Include="Models\Contact.cs" />
     <Compile Include="Models\Notation.cs" />
     <Compile Include="Models\AutoCompleteSearch.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
@@ -276,6 +280,7 @@
     <Compile Include="Models\ViewModels\ViewModelAllDetailRestaurants.cs" />
     <Compile Include="Models\ViewModels\ViewModelDetailRestaurants.cs" />
     <Compile Include="Models\ViewModels\ViewModelEvaluation.cs" />
+    <Compile Include="Models\ViewModels\ViewModelFilter.cs" />
     <Compile Include="Models\ViewModels\ViewModelGroupRestaurants.cs" />
     <Compile Include="Models\ViewModels\ViewModelListerRestaurants.cs" />
     <Compile Include="Models\ViewModels\ViewModelSearch.cs" />
@@ -292,14 +297,14 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\jquery-2.1.4.min.map" />
-    <Content Include="Views\Shared\_Login.cshtml" />
     <Content Include="Views\Restaurant\Proposer.cshtml" />
     <Content Include="Views\Restaurant\Lister.cshtml" />
-    <Content Include="Views\Shared\View.cshtml" />
     <Content Include="Views\Restaurant\Details.cshtml" />
     <Content Include="Views\Shared\_Search.cshtml" />
     <Content Include="Views\Authentication\Login.cshtml" />
-    <Content Include="Views\Restaurant\ListerRestaurantCuisine.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\Sent.cshtml" />
+    <Content Include="Views\Shared\_Filter.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -311,8 +316,8 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201512161323203_InitialCreate.resx">
-      <DependentUpon>201512161323203_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201601041415196_InitialToCreate.resx">
+      <DependentUpon>201601041415196_InitialToCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

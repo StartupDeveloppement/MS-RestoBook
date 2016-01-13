@@ -194,3 +194,5 @@ FakesAssemblies/
 
 # Visual Studio 6 workspace options file
 *.opt
+/RestoBook/RestoBook/Views/Shared
+/RestoBook/RestoBook/Scripts

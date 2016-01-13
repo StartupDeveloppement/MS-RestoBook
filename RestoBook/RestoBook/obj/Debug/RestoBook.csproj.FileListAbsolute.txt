@@ -148,3 +148,4 @@ D:\Documents\Visual Studio 2015\Projects\MS-RestoBook\RestoBook\RestoBook\bin\Mi
 D:\Documents\Visual Studio 2015\Projects\MS-RestoBook\RestoBook\RestoBook\bin\Microsoft.Owin.Security.xml
 D:\Documents\Visual Studio 2015\Projects\MS-RestoBook\RestoBook\RestoBook\bin\Microsoft.Owin.Security.Cookies.xml
 D:\Documents\Visual Studio 2015\Projects\MS-RestoBook\RestoBook\RestoBook\obj\Debug\RestoBook.Migrations.InitialCreate.resources
+D:\Documents\Visual Studio 2015\Projects\MS-RestoBook\RestoBook\RestoBook\obj\Debug\RestoBook.Migrations.InitialToCreate.resources

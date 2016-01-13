@@ -1,0 +1,33 @@
+﻿@model RestoBook.Models.Contact
+@{
+    ViewBag.Title = "Contact";
+}
+
+<div class="container">
+    <div class="content">
+        <div class="row">
+            <div class="bgblock divform">
+
+                <h4>Contact</h4>
+                <hr />
+                @using (Html.BeginForm())
+            {
+                    @Html.AntiForgeryToken()
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.FromName)
+                        @Html.TextBoxFor(m => m.FromName, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.FromEmail)
+                        @Html.TextBoxFor(m => m.FromEmail, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Message)
+                        @Html.TextAreaFor(m => m.Message, new { @class = "form-control" })
+                    </div>
+                    <button type="submit" class="btn btn-default">Send</button>
+                }
+            </div>
+        </div>
+    </div>
+</div>

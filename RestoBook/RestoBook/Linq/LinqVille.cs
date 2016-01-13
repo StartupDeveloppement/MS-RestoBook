@@ -53,5 +53,16 @@ namespace RestoBook.Linq
             }
         }
 
+        public static List<string> GetAllVille()
+        {
+            using(var db = new RestaurantDbContext())
+            {
+                var querry_ville = from ville in db.db_ville
+                                   orderby ville.lb_ville ascending
+                                   select ville.lb_ville;
+
+                return querry_ville.ToList();
+            }
+        }
     }
 }

@@ -1,24 +1,33 @@
 ﻿body {
+    background-color: #F1F1F1;
     padding-top: 50px;
-    padding-bottom: 20px;
+}
+#page{
+    min-height:calc(100vh - 60px);
 }
 
-/* Set padding to keep content from hitting the edges */
-/*.body-content {
-    /*padding-left: 15px;
-    padding-right: 15px;
-    padding-left: 0px;
-    padding-right: 0px;
+.content{
+    padding-top:20px;
+}
+
+.bgblock{
+    background-color:#FFF;
+}
+
+hr{
+    background-color:#CCC;
+    height:1px;
+    border:0px;
+}
+
+/************************ Filter ************************/
+
+/*.panel-heading + #filter-lsCusisine .other-cuisine:first-child{
+    border: 1px solid #DDD;
+    border-width:1px 0px;
 }*/
 
-/* Set width on the form input elements since they're 100% wide by default */
-/*input,
-select,
-textarea {
-    max-width: 280px;
-}*/
-
-/************************ Top ************************/
+/************************ Header ************************/
 #bgheader{
     background-color:#97D17A;
     border:none;
@@ -61,6 +70,14 @@ textarea {
     display: none;
 }
 
+/************************ Footer ************************/
+.footer{
+    /*display:table-row;*/
+    /*right:0;*/
+    height:60px;
+    background-color:#97D17A;
+}
+
 /************************ Form ************************/
 #SelectedItemsCuisine_chosen{
     display:block;
@@ -78,6 +95,9 @@ textarea {
     height:auto;
 }
 
+.divform{
+    padding:10px;
+}
 /************************ Details ************************/
 
 .details{
@@ -115,21 +135,6 @@ textarea {
     clip:auto;
 }
 
-
-
-/*#details-evaluation{
-    padding:10px 10px 10px 0px;
-}
-
-#details-restaurants .row .col-md-6 img{
-    width:100%;
-    height:auto;
-}
-
-.details-cuisine{
-    padding-right:5px;
-}*/
-
 /************************ Lister ************************/
 #lssearch{
     margin-top:15px;
@@ -138,32 +143,54 @@ textarea {
 
 .list-restaurant{
     margin-bottom:20px;
-    background-color:#F5F5F5;
 }
-
-/*.lsRestaurant{
-    background-color:#EDEDED;
-}
-
-.lsRestaurant img{
-    height:150px;
-}
-
-.content-restaurant{
-    vertical-align:middle;
-}*/
 
 /************************ Home ************************/
 
 #carousel-home > .item > img{
-    height:500px;
+    max-height:500px;
     width:100%;
 }
 
 #home_search{
-    margin:20px 0px;
+    margin:0px 0px 20px;
 }
 
 .row .item-ville{
     text-align:center;
+}
+
+.thumbnail-box {
+    display: block;
+    position: relative;
+    z-index: 2;
+    padding-bottom:15px;
+}
+
+.thumbnail-box img{
+    width:100%;
+}
+
+.thumbnail-box * + h3 {
+    margin-top:0px;
+}
+
+.thumbnail-box h3{
+    background-color:#000;
+    color:#fff;
+    display:block;
+    left:0;
+    opacity:0.7;
+    padding:10px;
+    position:absolute;
+    right:0;
+    text-align:center;
+    top:50%;
+    width:100%;
+    z-index:2;
+    transform:translateY(-50%);
+}
+
+#map{
+    height:70%;
 }

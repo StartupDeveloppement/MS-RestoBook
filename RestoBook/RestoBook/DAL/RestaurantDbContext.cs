@@ -11,6 +11,7 @@ namespace RestoBook.DAL
         public DbSet<Restaurants> db_restaurants { get; set; }
         public DbSet<Adresse> db_addresse { get; set; }
         public DbSet<Notation> db_notation { get; set; }
+        public DbSet<Picture> db_Picture { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -38,7 +39,13 @@ namespace RestoBook.DAL
                 .HasRequired<Ville>(s => s.Villes)
                 .WithMany(s => s.Adresses)
                 .HasForeignKey(s => s.VilleId);
-                
+
+
+            modelBuilder.Entity<Picture>()
+                .HasRequired<Restaurants>(s => s.Restaurants)
+                .WithMany(s => s.Pictures)
+                .HasForeignKey(s => s.fk_Restaurant);
+                    
 
         }
     }

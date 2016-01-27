@@ -131,6 +131,7 @@ namespace RestoBook.Linq
                                   Cuisine = cuisine.lb_cuisne,
                                   Phone = restaurant.lb_tel,
                                   WebSite = restaurant.lb_web,
+                                  Description = restaurant.lb_description
                               };
 
                 var group_details = from gpRestaurant in details
@@ -146,6 +147,7 @@ namespace RestoBook.Linq
                                         Cuisine = gp.Select(s=>s.Cuisine).ToList(),
                                         Phone = gp.FirstOrDefault().Phone,
                                         WebSite = gp.FirstOrDefault().WebSite,
+                                        Description = gp.FirstOrDefault().Description
                                     };
                 return group_details.FirstOrDefault();
 
@@ -176,6 +178,7 @@ namespace RestoBook.Linq
                                   Cuisine = cuisine.lb_cuisne,
                                   Phone = restaurant.lb_tel,
                                   WebSite = restaurant.lb_web,
+                                  Description = restaurant.lb_description
                               };
 
                 var group_details = from gpRestaurant in details
@@ -191,6 +194,7 @@ namespace RestoBook.Linq
                                         Cuisine = gp.Select(s => s.Cuisine).ToList(),
                                         Phone = gp.FirstOrDefault().Phone,
                                         WebSite = gp.FirstOrDefault().WebSite,
+                                        Description = gp.FirstOrDefault().Description
                                     };
                 return group_details.FirstOrDefault();
             }

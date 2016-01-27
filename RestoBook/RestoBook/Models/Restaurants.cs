@@ -14,6 +14,7 @@ namespace RestoBook.Models
             this.TypeCuisines = new HashSet<TypeCuisine>();
             this.Adresses = new HashSet<Adresse>();
             this.Notations = new HashSet<Notation>();
+            this.Pictures = new HashSet<Picture>();
         }
 
         [Key]
@@ -31,11 +32,15 @@ namespace RestoBook.Models
         [Display(Name = "Téléphone")]
         public string lb_tel { get; set; }
 
+        public string lb_description { get; set; }
+
         public bool isActive { get; set; }
 
         public virtual ICollection<TypeCuisine> TypeCuisines { get; set; }
         public virtual ICollection<Adresse> Adresses { get; set; }
         public virtual ICollection<Notation> Notations { get; set; }
+
+        public virtual ICollection<Picture> Pictures { get; set; }
 
     }
 }

@@ -7,13 +7,13 @@ namespace RestoBook.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class InitialToCreate : IMigrationMetadata
+    public sealed partial class InitialCreate : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(InitialToCreate));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(InitialCreate));
         
         string IMigrationMetadata.Id
         {
-            get { return "201601041415196_InitialToCreate"; }
+            get { return "201601270902507_InitialCreate"; }
         }
         
         string IMigrationMetadata.Source

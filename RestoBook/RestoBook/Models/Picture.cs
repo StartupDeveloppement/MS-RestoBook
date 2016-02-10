@@ -12,7 +12,9 @@ namespace RestoBook.Models
         [Key]
         public int Id_Picture { get; set; }
         public string lb_Name { get; set; }
+
         public byte[] lb_Picure { get; set; }
+        public bool banner { get; set; }
 
         public int fk_Restaurant { get; set; }
 

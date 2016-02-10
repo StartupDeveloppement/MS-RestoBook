@@ -261,21 +261,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201601270902507_InitialCreate.cs" />
-    <Compile Include="Migrations\201601270902507_InitialCreate.Designer.cs">
-      <DependentUpon>201601270902507_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201601271001373_InitialCreate1.cs" />
-    <Compile Include="Migrations\201601271001373_InitialCreate1.Designer.cs">
-      <DependentUpon>201601271001373_InitialCreate1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201601271303153_Picture.cs" />
-    <Compile Include="Migrations\201601271303153_Picture.Designer.cs">
-      <DependentUpon>201601271303153_Picture.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201601271316400_Picture1.cs" />
-    <Compile Include="Migrations\201601271316400_Picture1.Designer.cs">
-      <DependentUpon>201601271316400_Picture1.cs</DependentUpon>
+    <Compile Include="Migrations\201602100757020_initial.cs" />
+    <Compile Include="Migrations\201602100757020_initial.Designer.cs">
+      <DependentUpon>201602100757020_initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Adresse.cs" />
@@ -328,17 +316,8 @@
     <Folder Include="Views\Register\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201601270902507_InitialCreate.resx">
-      <DependentUpon>201601270902507_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201601271001373_InitialCreate1.resx">
-      <DependentUpon>201601271001373_InitialCreate1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201601271303153_Picture.resx">
-      <DependentUpon>201601271303153_Picture.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201601271316400_Picture1.resx">
-      <DependentUpon>201601271316400_Picture1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201602100757020_initial.resx">
+      <DependentUpon>201602100757020_initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

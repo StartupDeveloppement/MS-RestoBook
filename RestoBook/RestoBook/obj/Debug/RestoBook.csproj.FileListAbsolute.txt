@@ -211,10 +211,8 @@ C:\Git\RestoBook\RestoBook\RestoBook\bin\fr\System.Web.Webpages.Deployment.resou
 C:\Git\RestoBook\RestoBook\RestoBook\bin\fr\System.Web.Webpages.Razor.resources.dll
 C:\Git\RestoBook\RestoBook\RestoBook\bin\fr\System.Web.Helpers.resources.dll
 C:\Git\RestoBook\RestoBook\RestoBook\bin\fr\System.Web.Mvc.resources.dll
-C:\Git\RestoBook\RestoBook\RestoBook\obj\Debug\RestoBook.Migrations.InitialCreate.resources
-C:\Git\RestoBook\RestoBook\RestoBook\obj\Debug\RestoBook.Migrations.InitialCreate1.resources
-C:\Git\RestoBook\RestoBook\RestoBook\obj\Debug\RestoBook.Migrations.Picture.resources
-C:\Git\RestoBook\RestoBook\RestoBook\obj\Debug\RestoBook.Migrations.Picture1.resources
-C:\Git\RestoBook\RestoBook\RestoBook\obj\Debug\RestoBook.csproj.GenerateResource.Cache
 C:\Git\RestoBook\RestoBook\RestoBook\obj\Debug\RestoBook.dll
 C:\Git\RestoBook\RestoBook\RestoBook\obj\Debug\RestoBook.pdb
+C:\Git\RestoBook\RestoBook\RestoBook\obj\Debug\RestoBook.csprojResolveAssemblyReference.cache
+C:\Git\RestoBook\RestoBook\RestoBook\obj\Debug\RestoBook.Migrations.initial.resources
+C:\Git\RestoBook\RestoBook\RestoBook\obj\Debug\RestoBook.csproj.GenerateResource.Cache

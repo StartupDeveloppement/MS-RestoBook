@@ -78,7 +78,7 @@ namespace RestoBook.Controllers
             if (ModelState.IsValid)
             {
                 var message = new MailMessage();
-                //message.From = new MailAddress(model.FromEmail);
+                message.From = new MailAddress(model.FromEmail);
                 message.To.Add(new MailAddress("ingesup.test@gmail.com"));
                 message.Body = model.Message;
                 message.Subject = "Contact";
@@ -86,10 +86,10 @@ namespace RestoBook.Controllers
 
                 using (var smtp = new SmtpClient())
                 {
-                    //smtp.Host = "smtp.gmail.com";
-                    //smtp.Port = 587;
-                    //smtp.EnableSsl = true;
-                    //smtp.Credentials = new NetworkCredential("ingesup.test@gmail.com", "ingesuptest");
+                    smtp.Host = "smtp.gmail.com";
+                    smtp.Port = 587;
+                    smtp.EnableSsl = true;
+                    smtp.Credentials = new NetworkCredential("ingesup.test@gmail.com", "ingesuptest");
 
                     await smtp.SendMailAsync(message);
                     return RedirectToAction("Sent");

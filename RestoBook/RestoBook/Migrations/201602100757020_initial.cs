@@ -3,7 +3,7 @@ namespace RestoBook.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class InitialCreate : DbMigration
+    public partial class initial : DbMigration
     {
         public override void Up()
         {
@@ -31,6 +31,7 @@ namespace RestoBook.Migrations
                         lb_nom = c.String(nullable: false),
                         lb_web = c.String(),
                         lb_tel = c.String(),
+                        lb_description = c.String(),
                         isActive = c.Boolean(nullable: false),
                     })
                 .PrimaryKey(t => t.Id_Restaurant);
@@ -43,6 +44,20 @@ namespace RestoBook.Migrations
                         Note = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id);
+            
+            CreateTable(
+                "dbo.Picture",
+                c => new
+                    {
+                        Id_Picture = c.Int(nullable: false, identity: true),
+                        lb_Name = c.String(),
+                        lb_Picure = c.Binary(),
+                        banner = c.Boolean(nullable: false),
+                        fk_Restaurant = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id_Picture)
+                .ForeignKey("dbo.Restaurants", t => t.fk_Restaurant, cascadeDelete: true)
+                .Index(t => t.fk_Restaurant);
             
             CreateTable(
                 "dbo.TypeCuisine",
@@ -96,18 +111,21 @@ namespace RestoBook.Migrations
             DropForeignKey("dbo.Adresse", "RestaurantsId", "dbo.Restaurants");
             DropForeignKey("dbo.TypeCuisinesRestaurants", "Id_Cuisine", "dbo.TypeCuisine");
             DropForeignKey("dbo.TypeCuisinesRestaurants", "Id_Restaurant", "dbo.Restaurants");
+            DropForeignKey("dbo.Picture", "fk_Restaurant", "dbo.Restaurants");
             DropForeignKey("dbo.NotationsRestaurants", "Id_Notation", "dbo.Notation");
             DropForeignKey("dbo.NotationsRestaurants", "Id_Restaurant", "dbo.Restaurants");
             DropIndex("dbo.TypeCuisinesRestaurants", new[] { "Id_Cuisine" });
             DropIndex("dbo.TypeCuisinesRestaurants", new[] { "Id_Restaurant" });
             DropIndex("dbo.NotationsRestaurants", new[] { "Id_Notation" });
             DropIndex("dbo.NotationsRestaurants", new[] { "Id_Restaurant" });
+            DropIndex("dbo.Picture", new[] { "fk_Restaurant" });
             DropIndex("dbo.Adresse", new[] { "RestaurantsId" });
             DropIndex("dbo.Adresse", new[] { "VilleId" });
             DropTable("dbo.TypeCuisinesRestaurants");
             DropTable("dbo.NotationsRestaurants");
             DropTable("dbo.Ville");
             DropTable("dbo.TypeCuisine");
+            DropTable("dbo.Picture");
             DropTable("dbo.Notation");
             DropTable("dbo.Restaurants");
             DropTable("dbo.Adresse");

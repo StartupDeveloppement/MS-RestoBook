@@ -5,11 +5,11 @@ VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestoBook", "RestoBook\RestoBook.csproj", "{8E9D7AB2-6000-4DC8-B992-506DE2E633B3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestoBook.Data", "D:\Documents\Visual Studio 2015\Projects\GestionRestoBook\RestoBook.Data\RestoBook.Data.csproj", "{EBF639E6-EB2D-45C3-BE01-9A15E6B22A62}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestoBook.DataService", "D:\Documents\Visual Studio 2015\Projects\GestionRestoBook\RestoBook.DataService\RestoBook.DataService.csproj", "{A90DCF0A-2BD9-4F4F-BAB7-00F43E7EDB48}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestoBook.Wpf", "D:\Documents\Visual Studio 2015\Projects\GestionRestoBook\RestoBook\RestoBook.Wpf.csproj", "{64E98A15-6AB5-43D8-8243-792A1B83E9B6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestoBook.Data", "D:\Documents\Visual Studio 2015\Projects\GestionRestoBook\RestoBook.Data\RestoBook.Data.csproj", "{EBF639E6-EB2D-45C3-BE01-9A15E6B22A62}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestoBook.Wpf", "D:\Documents\Visual Studio 2015\Projects\GestionRestoBook\RestoBook.Wpf\RestoBook.Wpf.csproj", "{64E98A15-6AB5-43D8-8243-792A1B83E9B6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,14 +21,14 @@ Global
 		{8E9D7AB2-6000-4DC8-B992-506DE2E633B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8E9D7AB2-6000-4DC8-B992-506DE2E633B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8E9D7AB2-6000-4DC8-B992-506DE2E633B3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EBF639E6-EB2D-45C3-BE01-9A15E6B22A62}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EBF639E6-EB2D-45C3-BE01-9A15E6B22A62}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EBF639E6-EB2D-45C3-BE01-9A15E6B22A62}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EBF639E6-EB2D-45C3-BE01-9A15E6B22A62}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A90DCF0A-2BD9-4F4F-BAB7-00F43E7EDB48}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A90DCF0A-2BD9-4F4F-BAB7-00F43E7EDB48}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A90DCF0A-2BD9-4F4F-BAB7-00F43E7EDB48}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A90DCF0A-2BD9-4F4F-BAB7-00F43E7EDB48}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EBF639E6-EB2D-45C3-BE01-9A15E6B22A62}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EBF639E6-EB2D-45C3-BE01-9A15E6B22A62}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EBF639E6-EB2D-45C3-BE01-9A15E6B22A62}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EBF639E6-EB2D-45C3-BE01-9A15E6B22A62}.Release|Any CPU.Build.0 = Release|Any CPU
 		{64E98A15-6AB5-43D8-8243-792A1B83E9B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{64E98A15-6AB5-43D8-8243-792A1B83E9B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{64E98A15-6AB5-43D8-8243-792A1B83E9B6}.Release|Any CPU.ActiveCfg = Release|Any CPU

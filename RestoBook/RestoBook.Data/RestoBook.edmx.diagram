@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="5ea6b05c178e4208babefb9e5a104992" Name="Diagram1">
+        <EntityTypeShape EntityType="RestoBookModel.C__MigrationHistory" Width="1.5" PointX="7.75" PointY="1.25" />
+        <EntityTypeShape EntityType="RestoBookModel.Adresse" Width="1.5" PointX="5.25" PointY="2.375" />
+        <EntityTypeShape EntityType="RestoBookModel.Notation" Width="1.5" PointX="0.75" PointY="4.75" />
+        <EntityTypeShape EntityType="RestoBookModel.Picture" Width="1.5" PointX="5.25" PointY="6.375" />
+        <EntityTypeShape EntityType="RestoBookModel.Restaurants" Width="1.5" PointX="3" PointY="4.125" />
+        <EntityTypeShape EntityType="RestoBookModel.TypeCuisine" Width="1.5" PointX="5.25" PointY="9.375" />
+        <EntityTypeShape EntityType="RestoBookModel.Ville" Width="1.5" PointX="3" PointY="0.75" />
+        <AssociationConnector Association="RestoBookModel.FK_dbo_Adresse_dbo_Restaurants_RestaurantsId" />
+        <AssociationConnector Association="RestoBookModel.FK_dbo_Adresse_dbo_Ville_VilleId" />
+        <AssociationConnector Association="RestoBookModel.FK_dbo_Picture_dbo_Restaurants_fk_Restaurant" />
+        <AssociationConnector Association="RestoBookModel.NotationsRestaurants" />
+        <AssociationConnector Association="RestoBookModel.TypeCuisinesRestaurants" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

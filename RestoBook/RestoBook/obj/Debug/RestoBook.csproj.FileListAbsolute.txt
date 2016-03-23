@@ -216,3 +216,5 @@ C:\Git\RestoBook\RestoBook\RestoBook\obj\Debug\RestoBook.pdb
 C:\Git\RestoBook\RestoBook\RestoBook\obj\Debug\RestoBook.csprojResolveAssemblyReference.cache
 C:\Git\RestoBook\RestoBook\RestoBook\obj\Debug\RestoBook.Migrations.initial.resources
 C:\Git\RestoBook\RestoBook\RestoBook\obj\Debug\RestoBook.csproj.GenerateResource.Cache
+C:\Git\RestoBook\RestoBook\RestoBook\bin\fr\EntityFramework.resources.dll
+C:\Git\RestoBook\RestoBook\RestoBook\bin\fr\EntityFramework.SqlServer.resources.dll

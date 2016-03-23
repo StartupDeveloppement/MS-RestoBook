@@ -54,6 +54,7 @@ namespace RestoBook.Linq
                              from note in restaurant.Notations
                              join addresse in db.db_addresse on restaurant.Id_Restaurant equals addresse.RestaurantsId
                              join ville in db.db_ville on addresse.VilleId equals ville.Id_Ville
+                             join picture in db.db_Picture on restaurant.Id_Restaurant equals picture.fk_Restaurant
                              where restaurant.isActive && (restaurant.lb_nom.ToLower().Trim().Equals(search.ToLower().Trim())
                              || addresse.lb_rue.ToLower().Trim().Equals(search.ToLower().Trim())
                              || addresse.lb_codepostal.ToLower().Trim().Equals(search.ToLower().Trim())
@@ -66,7 +67,9 @@ namespace RestoBook.Linq
                                  Ville = ville.lb_ville,
                                  IdCuisine = cuisine.Id_Cuisine,
                                  StrCuisine = cuisine.lb_cuisne,
-                                 Notation = note.Note
+                                 Notation = note.Note,
+                                 BytePicture = picture.lb_Picure,
+                                 NamePicture = picture.lb_Name,
                              };
 
                 return result.ToList();
@@ -84,7 +87,9 @@ namespace RestoBook.Linq
                                Ville = gp.FirstOrDefault().Ville,
                                Notation = gp.Sum(s => s.Notation),
                                ListCuisine = gp.Select(s => s.StrCuisine).ToList(),
-                               DictCuisine = gp.Select(s => new { s.IdCuisine, s.StrCuisine }).ToDictionary(m=>m.IdCuisine,m=>m.StrCuisine)
+                               DictCuisine = gp.Select(s => new { s.IdCuisine, s.StrCuisine }).ToDictionary(m=>m.IdCuisine,m=>m.StrCuisine),
+                               NamePicture = gp.FirstOrDefault().NamePicture,
+                               BytePicture = gp.FirstOrDefault().BytePicture,
                            };
             return gpResult;
         }
@@ -119,6 +124,7 @@ namespace RestoBook.Linq
                               from note in restaurant.Notations
                               join addresse in db.db_addresse on restaurant.Id_Restaurant equals addresse.RestaurantsId
                               join ville in db.db_ville on addresse.VilleId equals ville.Id_Ville
+                              join picture in db.db_Picture on restaurant.Id_Restaurant equals picture.fk_Restaurant
                               where restaurant.Id_Restaurant == id
                               select new
                               {
@@ -131,7 +137,9 @@ namespace RestoBook.Linq
                                   Cuisine = cuisine.lb_cuisne,
                                   Phone = restaurant.lb_tel,
                                   WebSite = restaurant.lb_web,
-                                  Description = restaurant.lb_description
+                                  Description = restaurant.lb_description,
+                                  BytePicture = picture.lb_Picure,
+                                  NamePicture = picture.lb_Name,
                               };
 
                 var group_details = from gpRestaurant in details
@@ -147,7 +155,9 @@ namespace RestoBook.Linq
                                         Cuisine = gp.Select(s=>s.Cuisine).ToList(),
                                         Phone = gp.FirstOrDefault().Phone,
                                         WebSite = gp.FirstOrDefault().WebSite,
-                                        Description = gp.FirstOrDefault().Description
+                                        Description = gp.FirstOrDefault().Description,
+                                        BytePicture = gp.FirstOrDefault().BytePicture,
+                                        NamePicture = gp.FirstOrDefault().NamePicture,
                                     };
                 return group_details.FirstOrDefault();
 
@@ -163,6 +173,7 @@ namespace RestoBook.Linq
                               from note in restaurant.Notations
                               join addresse in db.db_addresse on restaurant.Id_Restaurant equals addresse.RestaurantsId
                               join ville in db.db_ville on addresse.VilleId equals ville.Id_Ville
+                              join picture in db.db_Picture on restaurant.Id_Restaurant equals picture.fk_Restaurant
                               let ville_cp = addresse.lb_codepostal.Trim().ToLower() + " " + ville.lb_ville.Trim().ToLower()
                               where restaurant.isActive && restaurant.lb_nom.Trim().ToLower().Equals(s_nom.Trim().ToLower())
                               && addresse.lb_rue.Trim().ToLower().Equals(s_rue.Trim().ToLower())
@@ -178,7 +189,9 @@ namespace RestoBook.Linq
                                   Cuisine = cuisine.lb_cuisne,
                                   Phone = restaurant.lb_tel,
                                   WebSite = restaurant.lb_web,
-                                  Description = restaurant.lb_description
+                                  Description = restaurant.lb_description,
+                                  NamePicture = picture.lb_Name,
+                                  BytePicture = picture.lb_Picure
                               };
 
                 var group_details = from gpRestaurant in details
@@ -194,7 +207,10 @@ namespace RestoBook.Linq
                                         Cuisine = gp.Select(s => s.Cuisine).ToList(),
                                         Phone = gp.FirstOrDefault().Phone,
                                         WebSite = gp.FirstOrDefault().WebSite,
-                                        Description = gp.FirstOrDefault().Description
+                                        Description = gp.FirstOrDefault().Description,
+                                        BytePicture = gp.FirstOrDefault().BytePicture,
+                                        NamePicture = gp.FirstOrDefault().NamePicture,
+                                         
                                     };
                 return group_details.FirstOrDefault();
             }

@@ -14,6 +14,8 @@ namespace RestoBook.Models.ViewModels
         public string Ville { get; set; }
         public string StrCuisine { get; set; }
         public double Notation { get; set; }
- 
+        public byte[] BytePicture { get; set; }
+        public string NamePicture { get; set; }
+
     }
 }

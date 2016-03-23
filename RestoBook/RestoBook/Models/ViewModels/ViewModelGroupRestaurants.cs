@@ -14,5 +14,7 @@ namespace RestoBook.Models.ViewModels
         public double Notation { get; set; }
         public List<string> ListCuisine { get; set; }
         public Dictionary<int,string> DictCuisine { get; set; }
+        public byte[]BytePicture { get; set; }
+        public string NamePicture { get; set; }
     }
 }

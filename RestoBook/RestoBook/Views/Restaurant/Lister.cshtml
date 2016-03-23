@@ -24,7 +24,7 @@
                                     <div class="row">
                                         <div class="col-md-5">
                                             <a href="@Url.Action("Details", "Restaurant", new { id = item.Id })">
-                                                <img class="img-responsive" alt="te" src="~/Content/Images/restaurant.jpg" />
+                                                <img class="img-responsive" src="data:image/png;base64,@System.Convert.ToBase64String(item.BytePicture)" alt="@item.NamePicture"/>
                                             </a>
                                         </div>
                                         <div class="col-md-7">

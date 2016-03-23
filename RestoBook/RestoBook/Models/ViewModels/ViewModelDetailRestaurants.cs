@@ -19,6 +19,8 @@ namespace RestoBook.Models.ViewModels
         public string WebSite { get; set; }
         public string Description { get; set; }
         public List<string> Cuisine { get; set; }
+        public byte[] BytePicture { get; set; }
+        public string NamePicture { get; set; }
 
 
     }

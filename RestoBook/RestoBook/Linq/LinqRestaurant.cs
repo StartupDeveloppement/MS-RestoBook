@@ -151,7 +151,7 @@ namespace RestoBook.Linq
                                         Id = gp.Key,
                                         Nom = gp.FirstOrDefault().Nom,
                                         Ville = gp.FirstOrDefault().Ville,
-                                        Notation = gp.Sum(s => s.Notation),
+                                        Notation = gp.Sum(s => s.Notation)/gp.Count(),
                                         Adresse = gp.FirstOrDefault().Adresse,
                                         CP = gp.FirstOrDefault().CP,
                                         Cuisine = gp.Select(s => s.Cuisine).ToList(),

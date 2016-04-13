@@ -151,6 +151,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\RestoBook.mdf" />
+    <Content Include="App_Data\RestoBook_log.ldf">
+      <DependentUpon>RestoBook.mdf</DependentUpon>
+    </Content>
     <Content Include="Content\Css\bootstrap-chosen.css" />
     <Content Include="Content\Css\PagedList.css" />
     <Content Include="Content\Css\star-rating.css" />
@@ -311,7 +315,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Views\Register\" />
   </ItemGroup>
   <ItemGroup>

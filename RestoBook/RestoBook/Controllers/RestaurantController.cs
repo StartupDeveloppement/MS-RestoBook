@@ -161,23 +161,25 @@ namespace RestoBook.Controllers
             }
             else
             {
+                //model_details = linqRestaurant.DetailsRestaurantByList(id);
                 model_details = linqRestaurant.DetailsRestaurantByList(id);
+
             }
 
             model_evaluation.nbDelicieux = linqEvaluation.getNbDelicieux(model_details.Id);
-            model_evaluation.percentDelicieux = (model_evaluation.nbDelicieux * 100)/2;
+            model_evaluation.percentDelicieux = (model_evaluation.nbDelicieux * 100) / 1;
 
             model_evaluation.nbBon = linqEvaluation.getNbBon(model_details.Id);
-            model_evaluation.percentBon = (model_evaluation.nbBon*100)/ 2;
+            model_evaluation.percentBon = (model_evaluation.nbBon * 100) / 1;
 
             model_evaluation.nbAcceptable = linqEvaluation.getNbAcceptable(model_details.Id);
-            model_evaluation.percentAcceptable = (model_evaluation.nbAcceptable * 100) / 2;
+            model_evaluation.percentAcceptable = (model_evaluation.nbAcceptable * 100) / 1;
 
             model_evaluation.nbPassable = linqEvaluation.getNbPassable(model_details.Id);
-            model_evaluation.percentPassable = (model_evaluation.nbPassable * 100) / 2;
+            model_evaluation.percentPassable = (model_evaluation.nbPassable * 100) / 1;
 
-            model_evaluation.nbMauvais= linqEvaluation.getNbPassable(model_details.Id);
-            model_evaluation.percentMauvais= (model_evaluation.nbMauvais * 100) / 2;
+            model_evaluation.nbMauvais = linqEvaluation.getNbPassable(model_details.Id);
+            model_evaluation.percentMauvais = (model_evaluation.nbMauvais * 100) / 1;
 
             model_Alldetails.detailRestautants = model_details;
             model_Alldetails.evaluationlRestautants = model_evaluation;

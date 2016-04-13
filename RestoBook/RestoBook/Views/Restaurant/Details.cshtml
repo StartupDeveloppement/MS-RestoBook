@@ -1,191 +1,229 @@
 ﻿@model RestoBook.Models.ViewModels.ViewModelAllDetailRestaurants
+
 @{
     ViewBag.Title = "Details";
 }
 
-
-
-
-
-
-<div class="container content">
-
-
-    <div class="">
-        <img src="" />
-    </div>
-
-
-
-
-    <div class="jumbotron" style="background:url(../../Content/Images/restaurant.jpg)">
-        <h1 style="color:white">@Model.detailRestautants.Nom</h1>
-        <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
-    </div>
-
-
-
-
-
-
-
-    <div class="row">
-        <div class="col-md-6">
-            <div class="well well-sm" id="details-restaurants">
-                <div class="row">
-                    <div class="col-md-6">
-                        <img src="~/Content/Images/restaurant.jpg" alt="details-restaurants" />
-                    </div>
-                    <div class="col-md-6">
-                        <h3>@Html.DisplayFor(m => m.detailRestautants.Nom)</h3>
-                        <p id="address">
-                            <i class="fa fa-map-marker fa-icon"></i>@Html.DisplayFor(m => m.detailRestautants.Adresse) @Html.DisplayFor(m => m.detailRestautants.CP)
-                            <span>@Html.DisplayFor(m => m.detailRestautants.Ville)</span>
-                        </p>
-
-                        <p>
-                            <i class="fa fa-cutlery fa-icon"></i>
-                            @foreach (var str_cuisine in Model.detailRestautants.Cuisine)
-                            {
-                                <span class="details-cuisine">@Html.DisplayFor(m => str_cuisine)</span>
-                            }
-                        </p>
-
-                        @if (!string.IsNullOrEmpty(Model.detailRestautants.Phone))
-                        {
-                            <p>
-                                <i class="fa fa-phone fa-icon"></i>
-                                <span>@Html.DisplayFor(m => m.detailRestautants.Phone)</span>
-                            </p>
-                        }
-                        @if (!string.IsNullOrEmpty(Model.detailRestautants.WebSite))
-                        {
-                            <p>
-                                <i class="fa fa-laptop fa-icon"></i>
-                                <span>@Html.DisplayFor(m => m.detailRestautants.WebSite)</span>
-                            </p>
-                        }
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div>
-        @Html.DisplayFor(m=>m.detailRestautants.Description)
-    </div>
-
-    @*<div class="row">
-        <div class="col-md-6">
-            <div class="well well-sm">
-                <div class="row">
-                    <div class="col-md-6 text-center">
-                        <h1 class="rating-num">@Html.DisplayFor(m => m.detailRestautants.Notation)</h1>
-                        <div>
-                            @Html.TextBoxFor(m => m.detailRestautants.Notation, new { @type = "number", @id = "note" })
-                        </div>
-                        <div>
-                            <i class="fa fa-user fa-icon"></i>2 total
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="row rating-desc">
-                            <div class="col-md-3 text-right">
-                                Delicieux
-                            </div>
-                            <div class="col-md-9">
-                                <div class="progress progress-evaluation">
-                                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="@Html.DisplayFor(m=>m.evaluationlRestautants.percentDelicieux)" style="width:@Html.DisplayFor(m=>m.evaluationlRestautants.percentDelicieux)%">
-                                        <span class="sr-only sr-only-percent">@Html.DisplayFor(m => m.evaluationlRestautants.percentDelicieux)%</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- end 5 -->
-                            <div class="col-md-3 text-right">
-                                Bon
-                            </div>
-                            <div class="col-md-9">
-                                <div class="progress progress-evaluation">
-                                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="@Html.DisplayFor(m=>m.evaluationlRestautants.percentBon)" style="width:@Html.DisplayFor(m=>m.evaluationlRestautants.percentBon)%">
-                                        <span class="sr-only sr-only-percent">@Html.DisplayFor(m => m.evaluationlRestautants.percentBon)%</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- end 4 -->
-                            <div class="col-md-3 text-right">
-                                Acceptable
-                            </div>
-                            <div class="col-md-9">
-                                <div class="progress progress-evaluation">
-                                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="@Html.DisplayFor(m=>m.evaluationlRestautants.percentAcceptable)" style="width:@Html.DisplayFor(m=>m.evaluationlRestautants.percentAcceptable)%">
-                                        <span class="sr-only sr-only-percent">@Html.DisplayFor(m => m.evaluationlRestautants.percentAcceptable)%</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- end 3 -->
-                            <div class="col-md-3 text-right">
-                                Passable
-                            </div>
-                            <div class="col-md-9">
-                                <div class="progress progress-evaluation">
-                                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="@Html.DisplayFor(m=>m.evaluationlRestautants.percentPassable)" style="width:@Html.DisplayFor(m=>m.evaluationlRestautants.percentPassable)%">
-                                        <span class="sr-only sr-only-percent">@Html.DisplayFor(m => m.evaluationlRestautants.percentPassable)%</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- end 2 -->
-                            <div class="col-md-3 text-right">
-                                Mauvais
-                            </div>
-                            <div class="col-md-9">
-                                <div class="progress progress-evaluation">
-                                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="@Html.DisplayFor(m=>m.evaluationlRestautants.percentMauvais)" style="width:@Html.DisplayFor(m=>m.evaluationlRestautants.percentMauvais)%">
-                                        <span class="sr-only sr-only-percent">@Html.DisplayFor(m => m.evaluationlRestautants.percentMauvais)%</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- end 1 -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>*@
-
-    <div class="row">
-        <div id="map" style="width: 640px; height: 480px;"></div>
-
-        
-    </div>
-
-
+<div class="col-md-12" id="detail-header">
+    @{
+        var index = Model.detailRestautants.Roles.FindIndex(a => a == "header");
+        var byteImg = Model.detailRestautants.BytePicture[index];
+        var name = Model.detailRestautants.NamePicture[index];
+    }
+    <img class="img-responsive" src="data:image/png;base64,@System.Convert.ToBase64String(byteImg)" alt="@name" />
 </div>
 
+<div class="container content">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="carousel slide details-restaurants" id="myCarousel">
+                <div class="carousel-inner">
+                    @{
+                        bool active = true;
+                        for (int i = 0; i < Model.detailRestautants.Roles.Count; i++)
+                        {
+                            if (Model.detailRestautants.Roles[i].Equals("slide"))
+                            {
+                                var byteImgSlide = Model.detailRestautants.BytePicture[i];
+                                var nameSlide = Model.detailRestautants.NamePicture[i];
+                                if (active)
+                                {
+                                    active = false;
+                                        <div class="item active">
+                                            <div class="col-md-4">
+                                                <img class="img-responsive" src="data:image/png;base64,@System.Convert.ToBase64String(byteImgSlide)" alt="@nameSlide" />
+                                            </div>
+                                        </div>
+                                }
+                                else
+                                {
+                                    <div class="item">
+                                        <div class="col-md-4">
+                                            <img class="img-responsive" src="data:image/png;base64,@System.Convert.ToBase64String(byteImgSlide)" alt="@nameSlide" />
+                                        </div>
+                                    </div>
+                                }
+                            }
+                        }
+                    }
+                            </div>
+                            <a class="left carousel-control" href="#myCarousel" data-slide="prev"><i class="glyphicon glyphicon-chevron-left"></i></a>
+                            <a class="right carousel-control" href="#myCarousel" data-slide="next"><i class="glyphicon glyphicon-chevron-right"></i></a>
+                        </div>
+                        <div class="col-md-12">
+                            @Html.DisplayFor(m => m.detailRestautants.Description)
+                        </div>
+                    </div>
+        
+                    <div class="col-md-6">
+                        <div class="well well-sm details-restaurants">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <img class="img-responsive" src="data:image/png;base64,@System.Convert.ToBase64String(byteImg)" alt="@name" />
+                                    @*<img src="~/Content/Images/restaurant.jpg" alt="details-restaurants" />*@
+                                </div>
+                                <div class="col-md-6">
+                                    <h3>@Html.DisplayFor(m => m.detailRestautants.Nom)</h3>
+                                    <p id="address">
+                                        <i class="fa fa-map-marker fa-icon"></i>@Html.DisplayFor(m => m.detailRestautants.Adresse) @Html.DisplayFor(m => m.detailRestautants.CP)
+                                        <span>@Html.DisplayFor(m => m.detailRestautants.Ville)</span>
+                                    </p>
+
+                                    <p>
+                                        <i class="fa fa-cutlery fa-icon"></i>
+                                        @foreach (var str_cuisine in Model.detailRestautants.Cuisine.Distinct())
+                                        {
+                                            <span class="details-cuisine">@Html.DisplayFor(m => str_cuisine)</span>
+                                        }
+                                    </p>
+
+                                    @if (!string.IsNullOrEmpty(Model.detailRestautants.Phone))
+                                    {
+                                        <p>
+                                            <i class="fa fa-phone fa-icon"></i>
+                                            <span>@Html.DisplayFor(m => m.detailRestautants.Phone)</span>
+                                        </p>
+                                    }
+                                    @if (!string.IsNullOrEmpty(Model.detailRestautants.WebSite))
+                                    {
+                                        <p>
+                                            <i class="fa fa-laptop fa-icon"></i>
+                                            <span>@Html.DisplayFor(m => m.detailRestautants.WebSite)</span>
+                                        </p>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div id="map" style="width: 100%; height: 380px;"></div>
+                    </div>
+                        <div class="col-md-6">
+                            <div class="well well-sm">
+                                <div class="row">
+                                    <div class="col-md-6 text-center">
+                                        <h1 class="rating-num">@Html.DisplayFor(m => m.detailRestautants.Notation)</h1>
+                                        <div>
+                                            @Html.TextBoxFor(m => m.detailRestautants.Notation, new { @type = "number", @id = "note" })
+                                        </div>
+                                        <div>
+                                            <i class="fa fa-user fa-icon"></i>1 total
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="row rating-desc">
+                                            <div class="col-md-3 text-right">
+                                                Delicieux
+                                            </div>
+                                            <div class="col-md-9">
+                                                <div class="progress progress-evaluation">
+                                                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="@Html.DisplayFor(m=>m.evaluationlRestautants.percentDelicieux)" style="width:@Html.DisplayFor(m=>m.evaluationlRestautants.percentDelicieux)%">
+                                                        <span class="sr-only sr-only-percent">@Html.DisplayFor(m => m.evaluationlRestautants.percentDelicieux)%</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- end 5 -->
+                                            <div class="col-md-3 text-right">
+                                                Bon
+                                            </div>
+                                            <div class="col-md-9">
+                                                <div class="progress progress-evaluation">
+                                                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="@Html.DisplayFor(m=>m.evaluationlRestautants.percentBon)" style="width:@Html.DisplayFor(m=>m.evaluationlRestautants.percentBon)%">
+                                                        <span class="sr-only sr-only-percent">@Html.DisplayFor(m => m.evaluationlRestautants.percentBon)%</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- end 4 -->
+                                            <div class="col-md-3 text-right">
+                                                Acceptable
+                                            </div>
+                                            <div class="col-md-9">
+                                                <div class="progress progress-evaluation">
+                                                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="@Html.DisplayFor(m=>m.evaluationlRestautants.percentAcceptable)" style="width:@Html.DisplayFor(m=>m.evaluationlRestautants.percentAcceptable)%">
+                                                        <span class="sr-only sr-only-percent">@Html.DisplayFor(m => m.evaluationlRestautants.percentAcceptable)%</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- end 3 -->
+                                            <div class="col-md-3 text-right">
+                                                Passable
+                                            </div>
+                                            <div class="col-md-9">
+                                                <div class="progress progress-evaluation">
+                                                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="@Html.DisplayFor(m=>m.evaluationlRestautants.percentPassable)" style="width:@Html.DisplayFor(m=>m.evaluationlRestautants.percentPassable)%">
+                                                        <span class="sr-only sr-only-percent">@Html.DisplayFor(m => m.evaluationlRestautants.percentPassable)%</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- end 2 -->
+                                            <div class="col-md-3 text-right">
+                                                Mauvais
+                                            </div>
+                                            <div class="col-md-9">
+                                                <div class="progress progress-evaluation">
+                                                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="@Html.DisplayFor(m=>m.evaluationlRestautants.percentMauvais)" style="width:@Html.DisplayFor(m=>m.evaluationlRestautants.percentMauvais)%">
+                                                        <span class="sr-only sr-only-percent">@Html.DisplayFor(m => m.evaluationlRestautants.percentMauvais)%</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- end 1 -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                            </div>
 
 
 
 
-@section details{
-    @Styles.Render("~/Content/Css/stars-rating")
-    @Scripts.Render("~/bundles/stars-rating")
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $("#note").rating({
-                'readonly': true,
-                'showClear': false,
-                'showCaption': false,
-                'size': 'xs',
-                'hoverEnabled': false
-            });
-        });
+
+                            @section details{
+                                @Styles.Render("~/Content/Css/stars-rating")
+                                @Scripts.Render("~/bundles/stars-rating")
+                                <script type="text/javascript">
+                                    $(document).ready(function () {
+                                        $("#note").rating({
+                                            'readonly': true,
+                                            'showClear': false,
+                                            'showCaption': false,
+                                            'size': 'xs',
+                                            'hoverEnabled': false
+                                        });
+
+
+                                    });
+                                    $('#myCarousel').carousel({
+                                        interval: 10000
+                                    })
+
+                                    $('.carousel .item').each(function () {
+                                        var next = $(this).next();
+                                        if (!next.length) {
+                                            next = $(this).siblings(':first');
+                                        }
+                                        next.children(':first-child').clone().appendTo($(this));
+
+                                        if (next.next().length > 0) {
+                                            next.next().children(':first-child').clone().appendTo($(this));
+                                        }
+                                        else {
+                                            $(this).siblings(':first').children(':first-child').clone().appendTo($(this));
+                                        }
+                                    });
 
 
 
 
+                                </script>
 
-    </script>
+                                @Scripts.Render("~/bundles/google-maps")
+                                <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyATWeIk0PEkg_w5eMJvmxG3_kgULlpUPMg&signed_in=true&callback=initMap" async defer></script>
 
-@Scripts.Render("~/bundles/google-maps")
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyATWeIk0PEkg_w5eMJvmxG3_kgULlpUPMg&signed_in=true&callback=initMap" async defer></script>
-
-}
+                            }

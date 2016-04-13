@@ -32,9 +32,9 @@
                                             <span>@Html.TextBoxFor(m => item.Notation, new { @type = "number", @class = "note" })</span>
                                             <span>
                                                 Cuisine:
-                                                @foreach (var itemCuisine in item.DictCuisine)
+                                                @foreach (var itemCuisine in item.ListCuisine)
                                                 {
-                                                    <a href="@Url.Action("Lister","Restaurant", new { search = itemCuisine.Value })">@Html.DisplayFor(m => itemCuisine.Value)</a>
+                                                    <a href="@Url.Action("Lister","Restaurant", new { search = itemCuisine })">@Html.DisplayFor(m => itemCuisine)</a>
                                                 }
                                             </span>
                                         </div>

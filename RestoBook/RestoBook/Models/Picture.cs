@@ -14,7 +14,8 @@ namespace RestoBook.Models
         public string lb_Name { get; set; }
 
         public byte[] lb_Picure { get; set; }
-        public bool banner { get; set; }
+        public string role { get; set; }
+        public bool active { get; set; }
 
         public int fk_Restaurant { get; set; }
 

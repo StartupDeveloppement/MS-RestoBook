@@ -18,10 +18,12 @@ namespace RestoBook.Models.ViewModels
         public string Phone { get; set; }
         public string WebSite { get; set; }
         public string Description { get; set; }
+        public string CuisineA { get; set; }
         public List<string> Cuisine { get; set; }
-        public byte[] BytePicture { get; set; }
-        public string NamePicture { get; set; }
+        public List<byte[]> BytePicture { get; set; }
+        public List<string> NamePicture { get; set; }
+        public List<string> Roles { get; set; }
 
-
+        public Dictionary<string,string> Test { get; set; }
     }
 }

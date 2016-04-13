@@ -49,13 +49,14 @@ namespace RestoBook.Linq
         {
             using (var db = new RestaurantDbContext())
             {
-                var result = from restaurant in db.db_restaurants
-                             from cuisine in restaurant.TypeCuisines
-                             from note in restaurant.Notations
-                             join addresse in db.db_addresse on restaurant.Id_Restaurant equals addresse.RestaurantsId
-                             join ville in db.db_ville on addresse.VilleId equals ville.Id_Ville
-                             join picture in db.db_Picture on restaurant.Id_Restaurant equals picture.fk_Restaurant
-                             where restaurant.isActive && (restaurant.lb_nom.ToLower().Trim().Equals(search.ToLower().Trim())
+                var result = (from restaurant in db.db_restaurants
+                              from cuisine in restaurant.TypeCuisines
+                              from note in restaurant.Notations
+                              join addresse in db.db_addresse on restaurant.Id_Restaurant equals addresse.RestaurantsId
+                              join ville in db.db_ville on addresse.VilleId equals ville.Id_Ville
+                              join picture in db.db_Picture on restaurant.Id_Restaurant equals picture.fk_Restaurant
+                              where restaurant.isActive && picture.active && picture.role.Equals("header")  && (restaurant.lb_nom.ToLower().Trim().Equals(search.ToLower().Trim())
+                              
                              || addresse.lb_rue.ToLower().Trim().Equals(search.ToLower().Trim())
                              || addresse.lb_codepostal.ToLower().Trim().Equals(search.ToLower().Trim())
                              || ville.lb_ville.ToLower().Trim().Equals(search.ToLower().Trim()))
@@ -70,7 +71,7 @@ namespace RestoBook.Linq
                                  Notation = note.Note,
                                  BytePicture = picture.lb_Picure,
                                  NamePicture = picture.lb_Name,
-                             };
+                             }).Distinct();
 
                 return result.ToList();
             }
@@ -87,7 +88,7 @@ namespace RestoBook.Linq
                                Ville = gp.FirstOrDefault().Ville,
                                Notation = gp.Sum(s => s.Notation),
                                ListCuisine = gp.Select(s => s.StrCuisine).ToList(),
-                               DictCuisine = gp.Select(s => new { s.IdCuisine, s.StrCuisine }).ToDictionary(m=>m.IdCuisine,m=>m.StrCuisine),
+                               //DictCuisine = gp.Select(s => new { s.IdCuisine, s.StrCuisine }).ToDictionary(m => m.IdCuisine, m => m.StrCuisine),
                                NamePicture = gp.FirstOrDefault().NamePicture,
                                BytePicture = gp.FirstOrDefault().BytePicture,
                            };
@@ -95,7 +96,7 @@ namespace RestoBook.Linq
         }
 
 
-        public ViewModelDetailRestaurants DetailsRestaurantByList (int? id)
+       public ViewModelDetailRestaurants DetailsRestaurantByList (int? id)
         {
             using(var db = new RestaurantDbContext())
             {
@@ -125,7 +126,7 @@ namespace RestoBook.Linq
                               join addresse in db.db_addresse on restaurant.Id_Restaurant equals addresse.RestaurantsId
                               join ville in db.db_ville on addresse.VilleId equals ville.Id_Ville
                               join picture in db.db_Picture on restaurant.Id_Restaurant equals picture.fk_Restaurant
-                              where restaurant.Id_Restaurant == id
+                              where restaurant.Id_Restaurant == id && picture.active
                               select new
                               {
                                   Id = restaurant.Id_Restaurant,
@@ -140,58 +141,7 @@ namespace RestoBook.Linq
                                   Description = restaurant.lb_description,
                                   BytePicture = picture.lb_Picure,
                                   NamePicture = picture.lb_Name,
-                              };
-
-                var group_details = from gpRestaurant in details
-                         group gpRestaurant by gpRestaurant.Id into gp
-                                    select new ViewModelDetailRestaurants()
-                                    {
-                                        Id = gp.Key,
-                                        Nom = gp.FirstOrDefault().Nom,
-                                        Ville = gp.FirstOrDefault().Ville,
-                                        Notation = gp.Sum(s => s.Notation),
-                                        Adresse = gp.FirstOrDefault().Adresse,
-                                        CP = gp.FirstOrDefault().CP,
-                                        Cuisine = gp.Select(s=>s.Cuisine).ToList(),
-                                        Phone = gp.FirstOrDefault().Phone,
-                                        WebSite = gp.FirstOrDefault().WebSite,
-                                        Description = gp.FirstOrDefault().Description,
-                                        BytePicture = gp.FirstOrDefault().BytePicture,
-                                        NamePicture = gp.FirstOrDefault().NamePicture,
-                                    };
-                return group_details.FirstOrDefault();
-
-            }
-        }
-
-        public ViewModelDetailRestaurants DetailsRestaurantBySearch(string s_nom, string s_rue, string s_ville_cp)
-        {
-            using (var db = new RestaurantDbContext())
-            {
-                var details = from restaurant in db.db_restaurants
-                              from cuisine in restaurant.TypeCuisines
-                              from note in restaurant.Notations
-                              join addresse in db.db_addresse on restaurant.Id_Restaurant equals addresse.RestaurantsId
-                              join ville in db.db_ville on addresse.VilleId equals ville.Id_Ville
-                              join picture in db.db_Picture on restaurant.Id_Restaurant equals picture.fk_Restaurant
-                              let ville_cp = addresse.lb_codepostal.Trim().ToLower() + " " + ville.lb_ville.Trim().ToLower()
-                              where restaurant.isActive && restaurant.lb_nom.Trim().ToLower().Equals(s_nom.Trim().ToLower())
-                              && addresse.lb_rue.Trim().ToLower().Equals(s_rue.Trim().ToLower())
-                              && ville_cp.Equals(s_ville_cp.Trim().ToLower())
-                              select new
-                              {
-                                  Id = restaurant.Id_Restaurant,
-                                  Nom = restaurant.lb_nom,
-                                  Notation = note.Note,
-                                  Adresse = addresse.lb_rue,
-                                  CP = ville_cp,
-                                  Ville = ville.lb_ville,
-                                  Cuisine = cuisine.lb_cuisne,
-                                  Phone = restaurant.lb_tel,
-                                  WebSite = restaurant.lb_web,
-                                  Description = restaurant.lb_description,
-                                  NamePicture = picture.lb_Name,
-                                  BytePicture = picture.lb_Picure
+                                  Role = picture.role
                               };
 
                 var group_details = from gpRestaurant in details
@@ -208,9 +158,66 @@ namespace RestoBook.Linq
                                         Phone = gp.FirstOrDefault().Phone,
                                         WebSite = gp.FirstOrDefault().WebSite,
                                         Description = gp.FirstOrDefault().Description,
-                                        BytePicture = gp.FirstOrDefault().BytePicture,
-                                        NamePicture = gp.FirstOrDefault().NamePicture,
-                                         
+                                        BytePicture = gp.Select(s => s.BytePicture).ToList(),
+                                        NamePicture = gp.Select(s => s.NamePicture).ToList(),
+                                        Roles = gp.Select(s => s.Role).ToList(),
+                                    };
+
+
+                return group_details.FirstOrDefault();
+
+            }
+        }
+
+        public ViewModelDetailRestaurants DetailsRestaurantBySearch(string s_nom, string s_rue, string s_ville_cp)
+        {
+            using (var db = new RestaurantDbContext())
+            {
+                var details = from restaurant in db.db_restaurants
+                              from cuisine in restaurant.TypeCuisines
+                              from note in restaurant.Notations
+                              join addresse in db.db_addresse on restaurant.Id_Restaurant equals addresse.RestaurantsId
+                              join ville in db.db_ville on addresse.VilleId equals ville.Id_Ville
+                              join picture in db.db_Picture on restaurant.Id_Restaurant equals picture.fk_Restaurant
+                              let ville_cp = addresse.lb_codepostal.Trim().ToLower() + " " + ville.lb_ville.Trim().ToLower()
+                              where restaurant.isActive && picture.active && restaurant.lb_nom.Trim().ToLower().Equals(s_nom.Trim().ToLower()) //|| picture.active
+                              && addresse.lb_rue.Trim().ToLower().Equals(s_rue.Trim().ToLower())
+                              && ville_cp.Equals(s_ville_cp.Trim().ToLower())
+                              select new
+                              {
+                                  Id = restaurant.Id_Restaurant,
+                                  Nom = restaurant.lb_nom,
+                                  Notation = note.Note,
+                                  Adresse = addresse.lb_rue,
+                                  CP = ville_cp,
+                                  Ville = ville.lb_ville,
+                                  Cuisine = cuisine.lb_cuisne,
+                                  Phone = restaurant.lb_tel,
+                                  WebSite = restaurant.lb_web,
+                                  Description = restaurant.lb_description,
+                                  BytePicture = picture.lb_Picure,
+                                  NamePicture = picture.lb_Name,
+                                  Role = picture.role
+                              };
+
+                var group_details = from gpRestaurant in details
+                                    group gpRestaurant by gpRestaurant.Id into gp
+                                    select new ViewModelDetailRestaurants()
+                                    {
+                                        Id = gp.Key,
+                                        Nom = gp.FirstOrDefault().Nom,
+                                        Ville = gp.FirstOrDefault().Ville,
+                                        Notation = gp.Sum(s => s.Notation),
+                                        Adresse = gp.FirstOrDefault().Adresse,
+                                        CP = gp.FirstOrDefault().CP,
+                                        Cuisine = gp.Select(s => s.Cuisine).ToList(),
+                                        Phone = gp.FirstOrDefault().Phone,
+                                        WebSite = gp.FirstOrDefault().WebSite,
+                                        Description = gp.FirstOrDefault().Description,
+                                        BytePicture = gp.Select(s => s.BytePicture).ToList(),
+                                        NamePicture = gp.Select(s => s.NamePicture).ToList(),
+                                        Roles = gp.Select(s => s.Role).ToList(),
+
                                     };
                 return group_details.FirstOrDefault();
             }
@@ -224,8 +231,9 @@ namespace RestoBook.Linq
                              from cuisine in restaurant.TypeCuisines
                              from note in restaurant.Notations
                              join addresse in db.db_addresse on restaurant.Id_Restaurant equals addresse.RestaurantsId
+                             //join picture in db.db_Picture on restaurant.Id_Restaurant equals picture.fk_Restaurant
                              join ville in db.db_ville on addresse.VilleId equals ville.Id_Ville
-                             where restaurant.isActive && cuisine.Id_Cuisine == id
+                             where restaurant.isActive && cuisine.Id_Cuisine == id //|| picture.active
                              select new ViewModelListerRestaurants()
                              {
                                  Id = restaurant.Id_Restaurant,

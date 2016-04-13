@@ -51,6 +51,8 @@ namespace RestoBook.Controllers
                     TempData["ResultSearch"] = gpRestaurant;
                     return RedirectToAction("Lister", "Restaurant", new { search = SearchString });
                 }
+
+
             }
 
             return View();

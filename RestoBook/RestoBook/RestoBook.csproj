@@ -261,9 +261,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201602100757020_initial.cs" />
-    <Compile Include="Migrations\201602100757020_initial.Designer.cs">
-      <DependentUpon>201602100757020_initial.cs</DependentUpon>
+    <Compile Include="Migrations\201603281722238_Initial.cs" />
+    <Compile Include="Migrations\201603281722238_Initial.Designer.cs">
+      <DependentUpon>201603281722238_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Adresse.cs" />
@@ -273,7 +273,6 @@
     <Compile Include="Models\AutoCompleteSearch.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
     <Compile Include="Models\Picture.cs" />
-    <Compile Include="Models\RegisterController.cs" />
     <Compile Include="Models\Restaurants.cs" />
     <Compile Include="Models\TypeCuisine.cs" />
     <Compile Include="Models\User.cs" />
@@ -316,8 +315,8 @@
     <Folder Include="Views\Register\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201602100757020_initial.resx">
-      <DependentUpon>201602100757020_initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201603281722238_Initial.resx">
+      <DependentUpon>201603281722238_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -1,0 +1,104 @@
+﻿<Window x:Class="RestoBook.View.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:xcad="http://schemas.xceed.com/wpf/xaml/avalondock"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RestoBook"
+        xmlns:localModel="clr-namespace:RestoBook.ViewModel"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:Controls="clr-namespace:RestoBook.View"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="650">
+    <Grid>
+        <xcad:DockingManager Grid.Row="1">
+            <xcad:LayoutRoot x:Name="_layoutBase">
+                <xcad:LayoutPanel Orientation="Horizontal">
+                    <xcad:LayoutAnchorablePane DockWidth="200">
+                        <xcad:LayoutAnchorable Title="Recherche" CanAutoHide="False" CanFloat="False" >
+                            <Grid Margin="4">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"  />
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.Resources>
+                                    <Style TargetType="TextBox">
+                                        <Setter Property="Margin" Value="0,0,0,4"/>
+                                    </Style>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="Padding" Value="0,0,10,0"/>
+                                    </Style>
+                                </Grid.Resources>
+                                <TextBlock Grid.Row="0" Grid.Column="0">Nom</TextBlock>
+                                <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding TxtBoxNom}"/>
+                                <TextBlock Grid.Row="1" Grid.Column="0">Rue</TextBlock>
+                                <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding TxtBoxRue}"/>
+                                <TextBlock Grid.Row="2" Grid.Column="0">Cuisine</TextBlock>
+                                <xctk:CheckComboBox Grid.Row="2" Grid.Column="1" x:Name="checkComboCuisine" VerticalAlignment="Center" HorizontalAlignment="Center" ValueMemberPath="idCuisine" DisplayMemberPath="lb_Cuisine" ItemsSource="{Binding ListerCuisine}" SelectedItem="{Binding SelectedCuisine}" />
+                                <TextBlock Grid.Row="3" Grid.Column="0">Ville</TextBlock>
+                                <xctk:CheckComboBox Grid.Row="3" Grid.Column="1" x:Name="checkComboVille" VerticalAlignment="Center" HorizontalAlignment="Center" ValueMemberPath="idVille" DisplayMemberPath="typeVille" ItemsSource="{Binding ListerVille}" SelectedItem="{Binding SelectedVille}"/>
+                            </Grid>
+                        </xcad:LayoutAnchorable>
+                    </xcad:LayoutAnchorablePane>
+                    <xcad:LayoutAnchorablePaneGroup>
+                        <xcad:LayoutAnchorablePane DockWidth="400">
+                            <xcad:LayoutAnchorable Title="En cour de validation" ContentId="encours">
+                                <Controls:GridRestaurant ListerRestaurant="{Binding ListerNonApprouver}" DataContext="{StaticResource GridViewModel}"/>
+                            </xcad:LayoutAnchorable>
+                            <xcad:LayoutAnchorable x:Name="approuve" Title="Approuvés" ContentId="approuve">
+                                <Controls:GridRestaurant ListerRestaurant="{Binding ListerApprouver}" DataContext="{StaticResource GridViewModel}"/>
+                            </xcad:LayoutAnchorable>
+                            <xcad:LayoutAnchorable Title="Details" x:Name="tabDetails">
+                                <Grid  Margin="4" x:Name="GridDetails">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.Resources>
+                                        <Style TargetType="TextBox">
+                                            <Setter Property="Margin" Value="0,0,0,4"/>
+                                        </Style>
+                                        <Style x:Key="MarginControls" TargetType="{x:Type Control}">
+                                            <Setter Property="Margin" Value="0,0,10,0"/>
+                                        </Style>
+                                    </Grid.Resources>
+                                    <Label Style="{StaticResource MarginControls}" Content="Nom" Grid.Column="0" Grid.Row="0"/>
+                                    <TextBlock Grid.Column="1" Grid.Row="0" x:Name="txtBlockNom" Text="{Binding DetailsNom}" Width="auto"/>
+                                    <Label  Style="{StaticResource MarginControls}" Content="Cuisine" Grid.Column="0" Grid.Row="1"/>
+                                    <TextBlock Grid.Column="1" Grid.Row="1" x:Name="txtBlockCuisine" Text="{Binding DetailsCuisine}"/>
+                                    <Label  Style="{StaticResource MarginControls}" Content="Rue" Grid.Column="0" Grid.Row="2" Width="auto"/>
+                                    <TextBlock Grid.Column="1" Grid.Row="2" x:Name="txtBlockRue" Text="{Binding DetailsRue}"/>
+                                    <Label Style="{StaticResource MarginControls}" Content="Ville" Grid.Column="0" Grid.Row="3"/>
+                                    <TextBlock Grid.Column="1" Grid.Row="3" x:Name="txtBlockVille" Text="{Binding DetailsVille}" Width="auto"/>
+                                    <Label Style="{StaticResource MarginControls}" Content="CP" Grid.Column="3" Grid.Row="3"/>
+                                    <TextBlock Grid.Column="4" Grid.Row="3" x:Name="txtBlockCP" Text="{Binding DetailsCP}" Width="auto"/>
+                                    <Label Content="{Binding DetailsActive}" x:Name="labelActive" Visibility="Hidden"/>
+                                    <Label Content="{Binding DetailsID}" x:Name="labelID" Visibility="Hidden"/>
+                                    <Button Style="{StaticResource MarginControls}" Content="Modifier" Grid.Column="5" Grid.Row="5" x:Name="btnModifier" Click="btnModifier_Click"/>
+                                </Grid>
+                            </xcad:LayoutAnchorable>
+                        </xcad:LayoutAnchorablePane>
+                    </xcad:LayoutAnchorablePaneGroup>
+                </xcad:LayoutPanel>
+            </xcad:LayoutRoot>
+        </xcad:DockingManager>
+    </Grid>
+</Window>

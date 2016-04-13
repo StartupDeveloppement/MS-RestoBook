@@ -196,3 +196,5 @@ FakesAssemblies/
 *.opt
 /RestoBook/RestoBook/Views/Shared
 /RestoBook/RestoBook/Scripts
+/RestoBook/RestoBook/App_Data/*.ldf
+/RestoBook/RestoBook/App_Data/*.mdf
